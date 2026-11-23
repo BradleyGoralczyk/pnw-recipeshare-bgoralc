@@ -15,14 +15,16 @@ Implement all Must features M1-M7 before starting Should or Could features. Use 
 
 ## Commands
 
-The project has not yet been scaffolded. Once its package scripts are created, use these conventional npm commands (adjust only if `package.json` defines different names):
+Use Node.js 20.9 or newer and npm. From the repository root:
 
 - Install dependencies: `npm install`
 - Run locally: `npm run dev`
 - Run all tests: `npm test`
+- Run tests in watch mode: `npm run test:watch`
+- Check TypeScript: `npm run typecheck`
 - Create a production build: `npm run build`
 
-Keep one documented command for running the complete test suite. Update this file if the project adopts different commands.
+Keep `npm test` as the single command for the complete test suite. Update this file if the project adopts different commands.
 
 ## Coding conventions
 
@@ -42,3 +44,13 @@ Keep one documented command for running the complete test suite. Update this fil
 - Recipe photos are food photos supplied by image URL; do not add photo uploads before the Must features are complete.
 - Do not begin Should or Could work until M1-M7 meet their acceptance criteria.
 - Keep changes focused and commits clear. Do not claim a feature passes unless it has been checked against its acceptance criterion.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+## This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->
