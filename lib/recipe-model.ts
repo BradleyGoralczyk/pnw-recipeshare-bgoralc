@@ -24,6 +24,7 @@ export const CATEGORIES = [
 
 export type Cuisine = (typeof CUISINES)[number];
 export type Category = (typeof CATEGORIES)[number];
+export type RecipeSort = "newest" | "highest-rated";
 
 export interface Recipe {
   id: string;
@@ -50,10 +51,34 @@ export function filterRecipes(
   recipeList: Recipe[],
   cuisine: Cuisine | "",
   category: Category | "",
+  keyword = "",
 ): Recipe[] {
+  const normalizedKeyword = keyword.trim().toLocaleLowerCase();
+
   return recipeList.filter(
     (recipe) =>
       (!cuisine || recipe.cuisine === cuisine) &&
-      (!category || recipe.category === category),
+      (!category || recipe.category === category) &&
+      (!normalizedKeyword ||
+        recipe.title.toLocaleLowerCase().includes(normalizedKeyword) ||
+        recipe.ingredients.some((ingredient) =>
+          ingredient.toLocaleLowerCase().includes(normalizedKeyword),
+        )),
   );
+}
+
+export function sortRecipes(
+  recipeList: Recipe[],
+  sort: RecipeSort,
+): Recipe[] {
+  if (sort === "newest") return [...recipeList];
+
+  return recipeList
+    .map((recipe, index) => ({ recipe, index }))
+    .sort((left, right) => {
+      const leftRating = getAverageRating(left.recipe.ratings) ?? 0;
+      const rightRating = getAverageRating(right.recipe.ratings) ?? 0;
+      return rightRating - leftRating || left.index - right.index;
+    })
+    .map(({ recipe }) => recipe);
 }

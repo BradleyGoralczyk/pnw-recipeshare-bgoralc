@@ -38,7 +38,7 @@ export default async function HomePage() {
             <p className="eyebrow">From the community</p>
             <h2 id="recipes-heading">A taste of everywhere</h2>
           </div>
-          <p className="section-note">A few favorites to get you started</p>
+          <p className="section-note">Search, filter, and sort community recipes</p>
         </div>
         <RecipeFilters recipes={recipes} />
       </section>

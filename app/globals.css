@@ -229,7 +229,8 @@ h2 {
   font-weight: 650;
 }
 
-.filter-field select {
+.filter-field select,
+.filter-field input {
   background: #fffefa;
   border: 1px solid var(--line);
   border-radius: 0.55rem;

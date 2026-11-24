@@ -66,8 +66,8 @@ Repository: [BradleyGoralczyk/pnw-recipeshare-bgoralc](https://github.com/Bradle
 - **S2 Author recipe editing and deletion - Not done.**
 - **S3 Fair, account-linked ratings - Not done:** ratings are anonymous as scoped for the Must features.
 - **S4 Photo uploads - Not done:** recipes use image URLs.
-- **S5 Keyword search - Not done.**
-- **S6 Recipe sorting - Not done.**
+- **S5 Keyword search - Done:** case-insensitive title and ingredient search combines with cuisine and category filters.
+- **S6 Recipe sorting - Done:** visitors can sort by newest or highest average rating.
 
 ### Could have
 

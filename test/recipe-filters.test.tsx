@@ -2,13 +2,33 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
 import { RecipeFilters } from "@/components/RecipeFilters";
-import { filterRecipes } from "@/lib/recipe-model";
+import { filterRecipes, sortRecipes } from "@/lib/recipe-model";
 import { recipeFixtures } from "@/test/fixtures/recipes";
 
 const testRecipes = [
-  { ...recipeFixtures[0], id: "iranian-main", cuisine: "Iranian" as const, category: "Main Dish" as const },
-  { ...recipeFixtures[1], id: "iranian-snack", cuisine: "Iranian" as const, category: "Snack" as const },
-  { ...recipeFixtures[2], id: "chinese-main", cuisine: "Chinese" as const, category: "Main Dish" as const },
+  {
+    ...recipeFixtures[0],
+    id: "iranian-main",
+    title: "Iranian Rice Pilaf",
+    cuisine: "Iranian" as const,
+    category: "Main Dish" as const,
+  },
+  {
+    ...recipeFixtures[1],
+    id: "iranian-snack",
+    title: "Herb Bites",
+    cuisine: "Iranian" as const,
+    category: "Snack" as const,
+    ingredients: ["2 cups rice", ...recipeFixtures[1].ingredients],
+    ratings: [5],
+  },
+  {
+    ...recipeFixtures[2],
+    id: "chinese-main",
+    cuisine: "Chinese" as const,
+    category: "Main Dish" as const,
+    ratings: [4],
+  },
 ];
 
 describe("recipe filters", () => {
@@ -18,6 +38,25 @@ describe("recipe filters", () => {
     ]);
     expect(filterRecipes(testRecipes, "", "")).toEqual(testRecipes);
     expect(filterRecipes(testRecipes, "Iranian", "Dessert")).toEqual([]);
+  });
+
+  it("searches titles and ingredients and sorts highest rated first stably", () => {
+    const riceRecipes = filterRecipes(testRecipes, "", "", "rice");
+    expect(riceRecipes.map((recipe) => recipe.id)).toEqual([
+      "iranian-main",
+      "iranian-snack",
+    ]);
+    expect(
+      filterRecipes(testRecipes, "Iranian", "Main Dish", "rice").map(
+        (recipe) => recipe.id,
+      ),
+    ).toEqual(["iranian-main"]);
+
+    expect(sortRecipes(riceRecipes, "highest-rated").map((recipe) => recipe.id)).toEqual([
+      "iranian-snack",
+      "iranian-main",
+    ]);
+    expect(sortRecipes(testRecipes, "newest")).toEqual(testRecipes);
   });
 
   it("lets visitors combine, clear, and apply filters with a no-match message", () => {
@@ -30,12 +69,24 @@ describe("recipe filters", () => {
       target: { value: "Main Dish" },
     });
     expect(screen.getAllByRole("article")).toHaveLength(1);
-    expect(screen.getByRole("article", { name: "Golden Chickpea Curry" })).toBeInTheDocument();
+    expect(screen.getByRole("article", { name: "Iranian Rice Pilaf" })).toBeInTheDocument();
 
-    fireEvent.click(screen.getByRole("button", { name: "Clear filters" }));
+    fireEvent.change(screen.getByRole("searchbox", { name: "Search recipes" }), {
+      target: { value: "rice" },
+    });
+    expect(screen.getAllByRole("article")).toHaveLength(1);
+    expect(screen.getByRole("article", { name: "Iranian Rice Pilaf" })).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: "Clear filters and search" }));
     expect(screen.getAllByRole("article")).toHaveLength(testRecipes.length);
     expect(screen.getByLabelText("Cuisine")).toHaveValue("");
     expect(screen.getByLabelText("Category")).toHaveValue("");
+    expect(screen.getByRole("searchbox", { name: "Search recipes" })).toHaveValue("");
+
+    fireEvent.change(screen.getByLabelText("Sort by"), {
+      target: { value: "highest-rated" },
+    });
+    expect(screen.getAllByRole("article")[0]).toHaveAttribute("aria-label", "Herb Bites");
 
     fireEvent.change(screen.getByLabelText("Cuisine"), {
       target: { value: "Iranian" },
