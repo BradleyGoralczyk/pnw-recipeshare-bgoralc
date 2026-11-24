@@ -357,6 +357,20 @@ h2 {
   padding: 1.15rem 1.2rem 1.25rem;
 }
 
+.recipe-photo-credit {
+  color: var(--muted);
+  font-size: 0.7rem;
+  line-height: 1.4;
+  margin: 0;
+  padding: 0.35rem 1.2rem 0.75rem;
+}
+
+.recipe-photo-credit a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 .recipe-tags {
   align-items: center;
   display: flex;
@@ -747,6 +761,10 @@ h2 {
   font-style: italic;
   margin: 0;
   padding: 0.9rem 1.1rem 1rem;
+}
+
+.recipe-detail-photo-wrap .recipe-photo-credit {
+  padding-top: 0;
 }
 
 .not-found-panel {

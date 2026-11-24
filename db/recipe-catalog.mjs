@@ -1,5 +1,7 @@
 // Keep these values aligned with lib/recipe-model.ts; this file also runs in
 // plain Node from the database seed script, without a TypeScript loader.
+import { readFileSync } from "node:fs";
+
 const CUISINES = ["American", "Arabic", "Chinese", "German", "Indian", "Iranian", "Italian", "Japanese", "Mexican", "Other"];
 const CATEGORIES = ["Breakfast", "Main Dish", "Fast Food", "Soup", "Salad", "Dessert", "Snack", "Drink"];
 const DIETARY_TAGS = ["Vegetarian", "Vegan", "Gluten-free", "Dairy-free", "Nut-free"];
@@ -38,6 +40,12 @@ const catalogPhotos = {
     alt: "Representative photo of iced tea in a glass",
   },
 };
+const catalogPhotoManifest = JSON.parse(
+  readFileSync("db/catalog-photo-manifest.json", "utf8"),
+);
+const catalogPhotosByRecipe = new Map(
+  catalogPhotoManifest.filter((photo) => photo.blobUrl).map((photo) => [photo.recipeId, photo.blobUrl]),
+);
 
 const profiles = {
   American: {
@@ -934,8 +942,10 @@ export const catalogRecipes = CUISINES.flatMap((cuisine) =>
       ingredients,
       steps: stepsFor(cuisine, category, profile),
       prepTimeMinutes: prepTimes[category],
-      imageUrl: photo.url,
-      imageAlt: photo.alt,
+      imageUrl: catalogPhotosByRecipe.get(`catalog-${cuisine.toLowerCase()}-${category.toLowerCase().replaceAll(" ", "-")}`) ?? photo.url,
+      imageAlt: catalogPhotosByRecipe.has(`catalog-${cuisine.toLowerCase()}-${category.toLowerCase().replaceAll(" ", "-")}`)
+        ? `Representative photo for ${title}`
+        : photo.alt,
       dietaryTags: dietaryTags.filter((tag) => DIETARY_TAGS.includes(tag)),
       videoUrl: null,
     }];

@@ -31,4 +31,13 @@ describe("community recipe catalog", () => {
       expect(recipe.imageAlt).toMatch(/^Representative photo/);
     }
   });
+
+  it("assigns a distinct image to every recipe photo available in the source manifest", () => {
+    const individuallyPhotographed = catalogRecipes.filter((recipe) =>
+      recipe.imageUrl.includes("/recipe-images/catalog/recipes/"),
+    );
+    expect(individuallyPhotographed.length).toBeGreaterThan(0);
+    expect(new Set(individuallyPhotographed.map((recipe) => recipe.imageUrl)).size)
+      .toBe(individuallyPhotographed.length);
+  });
 });

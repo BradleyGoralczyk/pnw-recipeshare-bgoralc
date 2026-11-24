@@ -1,0 +1,372 @@
+[
+  {
+    "recipeId": "catalog-american-breakfast",
+    "photoTitle": "File:Porridge oats with blueberries and cinnamon.jpg",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/19/Porridge_oats_with_blueberries_and_cinnamon.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Porridge_oats_with_blueberries_and_cinnamon.jpg",
+    "creator": "Ash TheFreecycler",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "blobUrl": "https://b5kiqjzugnm5hspn.public.blob.vercel-storage.com/recipe-images/catalog/recipes/catalog-american-breakfast.jpg"
+  },
+  {
+    "recipeId": "catalog-american-main-dish",
+    "photoTitle": "File:2019-05-04 20 10 55 A burrito bowl from Chipotle in the Franklin Farm section of Oak Hill, Fairfax County, Virginia.jpg",
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/58/2019-05-04_20_10_55_A_burrito_bowl_from_Chipotle_in_the_Franklin_Farm_section_of_Oak_Hill%2C_Fairfax_County%2C_Virginia.jpg/1280px-2019-05-04_20_10_55_A_burrito_bowl_from_Chipotle_in_the_Franklin_Farm_section_of_Oak_Hill%2C_Fairfax_County%2C_Virginia.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:2019-05-04_20_10_55_A_burrito_bowl_from_Chipotle_in_the_Franklin_Farm_section_of_Oak_Hill,_Fairfax_County,_Virginia.jpg",
+    "creator": "Famartin",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "blobUrl": "https://b5kiqjzugnm5hspn.public.blob.vercel-storage.com/recipe-images/catalog/recipes/catalog-american-main-dish.jpg"
+  },
+  {
+    "recipeId": "catalog-american-fast-food",
+    "photoTitle": "File:(L-R) Dynamite Sushi Slider (tempura kale chip guacamole, ahi) and Hamakua Mushroom Fries (16115116420).jpg",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/03/%28L-R%29_Dynamite_Sushi_Slider_%28tempura_kale_chip_guacamole%2C_ahi%29_and_Hamakua_Mushroom_Fries_%2816115116420%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:(L-R)_Dynamite_Sushi_Slider_(tempura_kale_chip_guacamole,_ahi)_and_Hamakua_Mushroom_Fries_(16115116420).jpg",
+    "creator": "Arnold Gatilao from Oakland, CA, USA",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "blobUrl": "https://b5kiqjzugnm5hspn.public.blob.vercel-storage.com/recipe-images/catalog/recipes/catalog-american-fast-food.jpg"
+  },
+  {
+    "recipeId": "catalog-american-soup",
+    "photoTitle": "File:Potato and corn chowder.jpg",
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b6/Potato_and_corn_chowder.jpg/1280px-Potato_and_corn_chowder.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Potato_and_corn_chowder.jpg",
+    "creator": "Rootology",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "blobUrl": "https://b5kiqjzugnm5hspn.public.blob.vercel-storage.com/recipe-images/catalog/recipes/catalog-american-soup.jpg"
+  },
+  {
+    "recipeId": "catalog-american-salad",
+    "photoTitle": "File:Salmon, asparagus, and potatoes, with apple slaw - Summer Shack - Cambridge, MA.jpg",
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c4/Salmon%2C_asparagus%2C_and_potatoes%2C_with_apple_slaw_-_Summer_Shack_-_Cambridge%2C_MA.jpg/1280px-Salmon%2C_asparagus%2C_and_potatoes%2C_with_apple_slaw_-_Summer_Shack_-_Cambridge%2C_MA.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Salmon,_asparagus,_and_potatoes,_with_apple_slaw_-_Summer_Shack_-_Cambridge,_MA.jpg",
+    "creator": "Daderot",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "blobUrl": "https://b5kiqjzugnm5hspn.public.blob.vercel-storage.com/recipe-images/catalog/recipes/catalog-american-salad.jpg"
+  },
+  {
+    "recipeId": "catalog-american-dessert",
+    "photoTitle": "File:Leftover peach crumble at 3PM on a Saturday? Sure, why not? (9328443401).jpg",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0a/Leftover_peach_crumble_at_3PM_on_a_Saturday%3F_Sure%2C_why_not%3F_%289328443401%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Leftover_peach_crumble_at_3PM_on_a_Saturday%3F_Sure,_why_not%3F_(9328443401).jpg",
+    "creator": "Neil Conway from Oakland, USA",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "blobUrl": "https://b5kiqjzugnm5hspn.public.blob.vercel-storage.com/recipe-images/catalog/recipes/catalog-american-dessert.jpg"
+  },
+  {
+    "recipeId": "catalog-american-snack",
+    "photoTitle": "File:Roasted Chickpea.jpg",
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Roasted_Chickpea.jpg/1280px-Roasted_Chickpea.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Roasted_Chickpea.jpg",
+    "creator": "Thamizhpparithi Maari",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "blobUrl": "https://b5kiqjzugnm5hspn.public.blob.vercel-storage.com/recipe-images/catalog/recipes/catalog-american-snack.jpg"
+  },
+  {
+    "recipeId": "catalog-american-drink",
+    "photoTitle": "File:NCI iced tea.jpg",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e1/NCI_iced_tea.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:NCI_iced_tea.jpg",
+    "creator": "Renee Comet (photographer)",
+    "license": "Public domain",
+    "licenseUrl": "",
+    "blobUrl": "https://b5kiqjzugnm5hspn.public.blob.vercel-storage.com/recipe-images/catalog/recipes/catalog-american-drink.jpg"
+  },
+  {
+    "recipeId": "catalog-arabic-breakfast",
+    "photoTitle": "File:020241107 semolina porridge.webp",
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/020241107_semolina_porridge.webp/1280px-020241107_semolina_porridge.webp?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:020241107_semolina_porridge.webp",
+    "creator": "Silar",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "blobUrl": "https://b5kiqjzugnm5hspn.public.blob.vercel-storage.com/recipe-images/catalog/recipes/catalog-arabic-breakfast.webp"
+  },
+  {
+    "recipeId": "catalog-arabic-main-dish",
+    "photoTitle": "File:Liat Portal for Foodie Disorder - Fried dumplings, mujaddara, beet salad, and fried onions.jpg",
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c7/Liat_Portal_for_Foodie_Disorder_-_Fried_dumplings%2C_mujaddara%2C_beet_salad%2C_and_fried_onions.jpg/1280px-Liat_Portal_for_Foodie_Disorder_-_Fried_dumplings%2C_mujaddara%2C_beet_salad%2C_and_fried_onions.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Liat_Portal_for_Foodie_Disorder_-_Fried_dumplings,_mujaddara,_beet_salad,_and_fried_onions.jpg",
+    "creator": "HaJunkiyada",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "blobUrl": "https://b5kiqjzugnm5hspn.public.blob.vercel-storage.com/recipe-images/catalog/recipes/catalog-arabic-main-dish.jpg"
+  },
+  {
+    "recipeId": "catalog-arabic-fast-food",
+    "photoTitle": "File:Falafel in a pita.jpg",
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/Falafel_in_a_pita.jpg/1280px-Falafel_in_a_pita.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Falafel_in_a_pita.jpg",
+    "creator": "Israel_photo_gallery",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "blobUrl": "https://b5kiqjzugnm5hspn.public.blob.vercel-storage.com/recipe-images/catalog/recipes/catalog-arabic-fast-food.jpg"
+  },
+  {
+    "recipeId": "catalog-arabic-soup",
+    "photoTitle": "File:Red lentil soup.jpg",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1e/Red_lentil_soup.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Red_lentil_soup.jpg",
+    "creator": "Gilabrand at English Wikipedia",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "blobUrl": "https://b5kiqjzugnm5hspn.public.blob.vercel-storage.com/recipe-images/catalog/recipes/catalog-arabic-soup.jpg"
+  },
+  {
+    "recipeId": "catalog-arabic-salad",
+    "photoTitle": "File:Tabouli Deconstructed (4010760020).jpg",
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/72/Tabouli_Deconstructed_%284010760020%29.jpg/1280px-Tabouli_Deconstructed_%284010760020%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Tabouli_Deconstructed_(4010760020).jpg",
+    "creator": "Vegan Feast Catering",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "blobUrl": "https://b5kiqjzugnm5hspn.public.blob.vercel-storage.com/recipe-images/catalog/recipes/catalog-arabic-salad.jpg"
+  },
+  {
+    "recipeId": "catalog-arabic-dessert",
+    "photoTitle": "File:Little semolina yoghurt cakes with cardamom ice cream.jpg",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/8/85/Little_semolina_yoghurt_cakes_with_cardamom_ice_cream.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Little_semolina_yoghurt_cakes_with_cardamom_ice_cream.jpg",
+    "creator": "jules",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "blobUrl": "https://b5kiqjzugnm5hspn.public.blob.vercel-storage.com/recipe-images/catalog/recipes/catalog-arabic-dessert.jpg"
+  },
+  {
+    "recipeId": "catalog-arabic-snack",
+    "photoTitle": "File:Baked Chickpeas with Pita Crisps at Moroccan Soup Bar.jpg",
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a2/Baked_Chickpeas_with_Pita_Crisps_at_Moroccan_Soup_Bar.jpg/1280px-Baked_Chickpeas_with_Pita_Crisps_at_Moroccan_Soup_Bar.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Baked_Chickpeas_with_Pita_Crisps_at_Moroccan_Soup_Bar.jpg",
+    "creator": "Alpha",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "blobUrl": "https://b5kiqjzugnm5hspn.public.blob.vercel-storage.com/recipe-images/catalog/recipes/catalog-arabic-snack.jpg"
+  },
+  {
+    "recipeId": "catalog-arabic-drink",
+    "photoTitle": "File:Mint lemonade.jpg",
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/94/Mint_lemonade.jpg/1280px-Mint_lemonade.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Mint_lemonade.jpg",
+    "creator": "Bernard Gagnon",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "blobUrl": "https://b5kiqjzugnm5hspn.public.blob.vercel-storage.com/recipe-images/catalog/recipes/catalog-arabic-drink.jpg"
+  },
+  {
+    "recipeId": "catalog-chinese-breakfast",
+    "photoTitle": "File:Cantonese Sampan Congee (Boat Congee).jpeg",
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/20/Cantonese_Sampan_Congee_%28Boat_Congee%29.jpeg/1280px-Cantonese_Sampan_Congee_%28Boat_Congee%29.jpeg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Cantonese_Sampan_Congee_(Boat_Congee).jpeg",
+    "creator": "ZhengZhou",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "blobUrl": "https://b5kiqjzugnm5hspn.public.blob.vercel-storage.com/recipe-images/catalog/recipes/catalog-chinese-breakfast.jpg"
+  },
+  {
+    "recipeId": "catalog-chinese-main-dish",
+    "photoTitle": "File:Rice bowl topped with tofu (7960798384).jpg",
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/Rice_bowl_topped_with_tofu_%287960798384%29.jpg/1280px-Rice_bowl_topped_with_tofu_%287960798384%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Rice_bowl_topped_with_tofu_(7960798384).jpg",
+    "creator": "pelican from Tokyo, Japan",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "blobUrl": "https://b5kiqjzugnm5hspn.public.blob.vercel-storage.com/recipe-images/catalog/recipes/catalog-chinese-main-dish.jpg"
+  },
+  {
+    "recipeId": "catalog-chinese-fast-food",
+    "photoTitle": "File:Rice paper for spring rolls P1130018.JPG",
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ac/Rice_paper_for_spring_rolls_P1130018.JPG/1280px-Rice_paper_for_spring_rolls_P1130018.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Rice_paper_for_spring_rolls_P1130018.JPG",
+    "creator": "deror_avi",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "blobUrl": "https://b5kiqjzugnm5hspn.public.blob.vercel-storage.com/recipe-images/catalog/recipes/catalog-chinese-fast-food.jpg"
+  },
+  {
+    "recipeId": "catalog-chinese-soup",
+    "photoTitle": "File:Wonton chicken with pak choi and mushrooms tofu soup at home.jpg",
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d4/Wonton_chicken_with_pak_choi_and_mushrooms_tofu_soup_at_home.jpg/1280px-Wonton_chicken_with_pak_choi_and_mushrooms_tofu_soup_at_home.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Wonton_chicken_with_pak_choi_and_mushrooms_tofu_soup_at_home.jpg",
+    "creator": "Peachyeung316",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "blobUrl": "https://b5kiqjzugnm5hspn.public.blob.vercel-storage.com/recipe-images/catalog/recipes/catalog-chinese-soup.jpg"
+  },
+  {
+    "recipeId": "catalog-chinese-salad",
+    "photoTitle": "File:Pine and Crane DTLA - smashed cucumber salad.jpg",
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/38/Pine_and_Crane_DTLA_-_smashed_cucumber_salad.jpg/1280px-Pine_and_Crane_DTLA_-_smashed_cucumber_salad.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Pine_and_Crane_DTLA_-_smashed_cucumber_salad.jpg",
+    "creator": "Benoît Prieur",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "blobUrl": "https://b5kiqjzugnm5hspn.public.blob.vercel-storage.com/recipe-images/catalog/recipes/catalog-chinese-salad.jpg"
+  },
+  {
+    "recipeId": "catalog-chinese-dessert",
+    "photoTitle": "File:HK 北區 North District 上水中心 Sheung Shui Centre 商場 shopping mall shop 上海姥姥 Shanghai Lao Lao Restaurant food 擂沙圓 Black Sesame Glutinous Rice Balls September 2022 Px3 03.jpg",
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/66/HK_%E5%8C%97%E5%8D%80_North_District_%E4%B8%8A%E6%B0%B4%E4%B8%AD%E5%BF%83_Sheung_Shui_Centre_%E5%95%86%E5%A0%B4_shopping_mall_shop_%E4%B8%8A%E6%B5%B7%E5%A7%A5%E5%A7%A5_Shanghai_Lao_Lao_Restaurant_food_%E6%93%82%E6%B2%99%E5%9C%93_Black_Sesame_Glutinous_Rice_Balls_September_2022_Px3_03.jpg/1280px-thumbnail.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:HK_%E5%8C%97%E5%8D%80_North_District_%E4%B8%8A%E6%B0%B4%E4%B8%AD%E5%BF%83_Sheung_Shui_Centre_%E5%95%86%E5%A0%B4_shopping_mall_shop_%E4%B8%8A%E6%B5%B7%E5%A7%A5%E5%A7%A5_Shanghai_Lao_Lao_Restaurant_food_%E6%93%82%E6%B2%99%E5%9C%93_Black_Sesame_Glutinous_Rice_Balls_September_2022_Px3_03.jpg",
+    "creator": "GKWOCK CTAING HILLTAIN",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "blobUrl": "https://b5kiqjzugnm5hspn.public.blob.vercel-storage.com/recipe-images/catalog/recipes/catalog-chinese-dessert.jpg"
+  },
+  {
+    "recipeId": "catalog-chinese-snack",
+    "photoTitle": "File:Korean scallion pancake-Pajeon on a pan-01.jpg",
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/76/Korean_scallion_pancake-Pajeon_on_a_pan-01.jpg/1280px-Korean_scallion_pancake-Pajeon_on_a_pan-01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Korean_scallion_pancake-Pajeon_on_a_pan-01.jpg",
+    "creator": "by World to Table at Flickr",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "blobUrl": "https://b5kiqjzugnm5hspn.public.blob.vercel-storage.com/recipe-images/catalog/recipes/catalog-chinese-snack.jpg"
+  },
+  {
+    "recipeId": "catalog-chinese-drink",
+    "photoTitle": "File:Iced tea with ice cubes.jpg",
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6a/Iced_tea_with_ice_cubes.jpg/1280px-Iced_tea_with_ice_cubes.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Iced_tea_with_ice_cubes.jpg",
+    "creator": "Editor at Large",
+    "license": "CC BY-SA 2.5",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.5",
+    "blobUrl": "https://b5kiqjzugnm5hspn.public.blob.vercel-storage.com/recipe-images/catalog/recipes/catalog-chinese-drink.jpg"
+  },
+  {
+    "recipeId": "catalog-german-breakfast",
+    "photoTitle": "File:Oatmeal porridge with shredded apple, raisins, cinnamon and a few drops of honey (The Netherlands 2017) (34463290414).jpg",
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/78/Oatmeal_porridge_with_shredded_apple%2C_raisins%2C_cinnamon_and_a_few_drops_of_honey_%28The_Netherlands_2017%29_%2834463290414%29.jpg/1280px-Oatmeal_porridge_with_shredded_apple%2C_raisins%2C_cinnamon_and_a_few_drops_of_honey_%28The_Netherlands_2017%29_%2834463290414%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Oatmeal_porridge_with_shredded_apple,_raisins,_cinnamon_and_a_few_drops_of_honey_(The_Netherlands_2017)_(34463290414).jpg",
+    "creator": "Paul Arps from The Netherlands",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "blobUrl": "https://b5kiqjzugnm5hspn.public.blob.vercel-storage.com/recipe-images/catalog/recipes/catalog-german-breakfast.jpg"
+  },
+  {
+    "recipeId": "catalog-german-main-dish",
+    "photoTitle": "File:Red Potatoes in the Iron Skillet (861804565).jpg",
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Red_Potatoes_in_the_Iron_Skillet_%28861804565%29.jpg/1280px-Red_Potatoes_in_the_Iron_Skillet_%28861804565%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Red_Potatoes_in_the_Iron_Skillet_(861804565).jpg",
+    "creator": "Ryan Snyder",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "blobUrl": "https://b5kiqjzugnm5hspn.public.blob.vercel-storage.com/recipe-images/catalog/recipes/catalog-german-main-dish.jpg"
+  },
+  {
+    "recipeId": "catalog-german-fast-food",
+    "photoTitle": "File:Currywurst mit Pommes frites auf Helgoland.jpg",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1a/Currywurst_mit_Pommes_frites_auf_Helgoland.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Currywurst_mit_Pommes_frites_auf_Helgoland.jpg",
+    "creator": "Unknown Commons contributor",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "blobUrl": "https://b5kiqjzugnm5hspn.public.blob.vercel-storage.com/recipe-images/catalog/recipes/catalog-german-fast-food.jpg"
+  },
+  {
+    "recipeId": "catalog-german-soup",
+    "photoTitle": "File:Puy lentils - Stone soup.jpg",
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/01/Puy_lentils_-_Stone_soup.jpg/1280px-Puy_lentils_-_Stone_soup.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Puy_lentils_-_Stone_soup.jpg",
+    "creator": "jules / stone soup",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "blobUrl": "https://b5kiqjzugnm5hspn.public.blob.vercel-storage.com/recipe-images/catalog/recipes/catalog-german-soup.jpg"
+  },
+  {
+    "recipeId": "catalog-german-salad",
+    "photoTitle": "File:Potato salad.jpg",
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/60/Potato_salad.jpg/1280px-Potato_salad.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Potato_salad.jpg",
+    "creator": "Unknown Commons contributor",
+    "license": "CC BY 2.5",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.5",
+    "blobUrl": "https://b5kiqjzugnm5hspn.public.blob.vercel-storage.com/recipe-images/catalog/recipes/catalog-german-salad.jpg"
+  },
+  {
+    "recipeId": "catalog-german-dessert",
+    "photoTitle": "File:Apple Cinnamon Crumble.jpg",
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ed/Apple_Cinnamon_Crumble.jpg/1280px-Apple_Cinnamon_Crumble.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Apple_Cinnamon_Crumble.jpg",
+    "creator": "Aliva Sahoo",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "blobUrl": "https://b5kiqjzugnm5hspn.public.blob.vercel-storage.com/recipe-images/catalog/recipes/catalog-german-dessert.jpg"
+  },
+  {
+    "recipeId": "catalog-german-snack",
+    "photoTitle": "File:THREE MEMBERS OF A GERMAN GROUP FROM SAVANNAH, GEORGIA EAT WURST, SAUERKRAUT, PRETZELS AND DRINK SOFT DRINKS IN A... - NARA - 557795.jpg",
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/52/THREE_MEMBERS_OF_A_GERMAN_GROUP_FROM_SAVANNAH%2C_GEORGIA_EAT_WURST%2C_SAUERKRAUT%2C_PRETZELS_AND_DRINK_SOFT_DRINKS_IN_A..._-_NARA_-_557795.jpg/1280px-THREE_MEMBERS_OF_A_GERMAN_GROUP_FROM_SAVANNAH%2C_GEORGIA_EAT_WURST%2C_SAUERKRAUT%2C_PRETZELS_AND_DRINK_SOFT_DRINKS_IN_A..._-_NARA_-_557795.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:THREE_MEMBERS_OF_A_GERMAN_GROUP_FROM_SAVANNAH,_GEORGIA_EAT_WURST,_SAUERKRAUT,_PRETZELS_AND_DRINK_SOFT_DRINKS_IN_A..._-_NARA_-_557795.jpg",
+    "creator": "Al Stephenson",
+    "license": "Public domain",
+    "licenseUrl": "",
+    "blobUrl": "https://b5kiqjzugnm5hspn.public.blob.vercel-storage.com/recipe-images/catalog/recipes/catalog-german-snack.jpg"
+  },
+  {
+    "recipeId": "catalog-german-drink",
+    "photoTitle": "File:Pfälzer Schorle - panoramio.jpg",
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/01/Pf%C3%A4lzer_Schorle_-_panoramio.jpg/1280px-Pf%C3%A4lzer_Schorle_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Pf%C3%A4lzer_Schorle_-_panoramio.jpg",
+    "creator": "fotogoocom",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+    "blobUrl": "https://b5kiqjzugnm5hspn.public.blob.vercel-storage.com/recipe-images/catalog/recipes/catalog-german-drink.jpg"
+  },
+  {
+    "recipeId": "catalog-indian-breakfast",
+    "photoTitle": "File:Gram flour Chilla (Besan ka Cheela).JPG",
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/89/Gram_flour_Chilla_%28Besan_ka_Cheela%29.JPG/1280px-Gram_flour_Chilla_%28Besan_ka_Cheela%29.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Gram_flour_Chilla_(Besan_ka_Cheela).JPG",
+    "creator": "Mdsmds0",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "blobUrl": "https://b5kiqjzugnm5hspn.public.blob.vercel-storage.com/recipe-images/catalog/recipes/catalog-indian-breakfast.jpg"
+  },
+  {
+    "recipeId": "catalog-indian-main-dish",
+    "photoTitle": "File:Chana masala.jpg",
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8e/Chana_masala.jpg/1280px-Chana_masala.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Chana_masala.jpg",
+    "creator": "Simon Law (sfllaw) from Montréal , QC , Canada",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "blobUrl": "https://b5kiqjzugnm5hspn.public.blob.vercel-storage.com/recipe-images/catalog/recipes/catalog-indian-main-dish.jpg"
+  },
+  {
+    "recipeId": "catalog-indian-fast-food",
+    "photoTitle": "File:Kathi Rolls on Ganesh Chandra (14844989244).jpg",
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4b/Kathi_Rolls_on_Ganesh_Chandra_%2814844989244%29.jpg/1280px-Kathi_Rolls_on_Ganesh_Chandra_%2814844989244%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Kathi_Rolls_on_Ganesh_Chandra_(14844989244).jpg",
+    "creator": "Paul Hamilton",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "blobUrl": "https://b5kiqjzugnm5hspn.public.blob.vercel-storage.com/recipe-images/catalog/recipes/catalog-indian-fast-food.jpg"
+  },
+  {
+    "recipeId": "catalog-indian-soup",
+    "photoTitle": "File:Tomato Shorba(soup).jpg",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/34/Tomato_Shorba%28soup%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Tomato_Shorba(soup).jpg",
+    "creator": "Radhikamprabhu82",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "blobUrl": "https://b5kiqjzugnm5hspn.public.blob.vercel-storage.com/recipe-images/catalog/recipes/catalog-indian-soup.jpg"
+  },
+  {
+    "recipeId": "catalog-indian-salad",
+    "photoTitle": "File:Kachumber Salad.JPG",
+    "imageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/12/Kachumber_Salad.JPG/1280px-Kachumber_Salad.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Kachumber_Salad.JPG",
+    "creator": "Miansari66",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "blobUrl": "https://b5kiqjzugnm5hspn.public.blob.vercel-storage.com/recipe-images/catalog/recipes/catalog-indian-salad.jpg"
+  }
+]

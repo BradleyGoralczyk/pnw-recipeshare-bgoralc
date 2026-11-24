@@ -1,4 +1,5 @@
 import "server-only";
+import catalogPhotoManifest from "@/db/catalog-photo-manifest.json";
 
 import { getDb } from "@/lib/db";
 import {
@@ -63,6 +64,9 @@ function toRecipe(row: RecipeRow): Recipe {
     throw new Error("Database returned an invalid recipe prep time.");
   }
 
+  const imageUrl = readString(row, "imageUrl");
+  const imageCredit = catalogPhotoManifest.find((photo) => photo.blobUrl === imageUrl);
+
   return {
     id: readString(row, "id"),
     authorName: readString(row, "authorName"),
@@ -72,8 +76,18 @@ function toRecipe(row: RecipeRow): Recipe {
     ingredients: readStringList(row.ingredients, "ingredients"),
     steps: readStringList(row.steps, "steps"),
     prepTimeMinutes,
-    imageUrl: readString(row, "imageUrl"),
+    imageUrl,
     imageAlt: readString(row, "imageAlt"),
+    ...(imageCredit
+      ? {
+          imageCredit: {
+            creator: imageCredit.creator,
+            sourcePage: imageCredit.sourcePage,
+            license: imageCredit.license,
+            licenseUrl: imageCredit.licenseUrl || imageCredit.sourcePage,
+          },
+        }
+      : {}),
     ratings: readRatings(row.ratings),
     videoUrl:
       row.videoUrl === null || typeof row.videoUrl === "string"

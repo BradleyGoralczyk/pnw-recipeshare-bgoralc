@@ -35,6 +35,13 @@ export type Category = (typeof CATEGORIES)[number];
 export type DietaryTag = (typeof DIETARY_TAGS)[number];
 export type RecipeSort = "newest" | "highest-rated";
 
+export interface RecipeImageCredit {
+  creator: string;
+  sourcePage: string;
+  license: string;
+  licenseUrl: string;
+}
+
 export interface Recipe {
   id: string;
   authorName: string;
@@ -46,6 +53,7 @@ export interface Recipe {
   prepTimeMinutes: number;
   imageUrl: string;
   imageAlt: string;
+  imageCredit?: RecipeImageCredit;
   ratings: number[];
   videoUrl: string | null;
   dietaryTags: DietaryTag[];

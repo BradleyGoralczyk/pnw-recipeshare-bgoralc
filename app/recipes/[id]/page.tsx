@@ -120,6 +120,13 @@ export default async function RecipeDetailsPage({
             width={1200}
           />
           <p className="image-caption">A recipe shared with care</p>
+          {recipe.imageCredit && (
+            <p className="recipe-photo-credit">
+              Photo by <a href={recipe.imageCredit.sourcePage} target="_blank" rel="noreferrer">{recipe.imageCredit.creator}</a>
+              {" · "}
+              <a href={recipe.imageCredit.licenseUrl} target="_blank" rel="noreferrer">{recipe.imageCredit.license}</a>
+            </p>
+          )}
         </div>
       </article>
 

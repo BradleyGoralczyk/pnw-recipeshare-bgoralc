@@ -29,7 +29,7 @@ npm run db:seed
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000). The seed command adds 80 recipes covering every cuisine and category combination and is safe to repeat. Seven representative Unsplash photos are copied into public Vercel Blob storage by `npm run db:seed:images`; credits and source links are in [docs/seed-photo-credits.md](docs/seed-photo-credits.md).
+Open [http://localhost:3000](http://localhost:3000). The seed command adds 80 recipes covering every cuisine and category combination and is safe to repeat. Thirty-seven recipes now use individually selected, licensed photos; credits appear with the images and are recorded in [docs/catalog-photo-credits.md](docs/catalog-photo-credits.md). The other catalog recipes use the existing category photos, credited in [docs/seed-photo-credits.md](docs/seed-photo-credits.md).
 For this repository's existing sample data, `npm run db:migrate:images` copies the two sample photos to the connected public Blob store and updates their Neon URLs. It is safe to rerun. Existing images are grandfathered regardless of size; the 5 MB limit applies only to new uploads.
 
 ## Tests and build

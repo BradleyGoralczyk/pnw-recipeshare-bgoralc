@@ -57,6 +57,13 @@ export function RecipeCard({ recipe }: { recipe: Recipe }) {
           </p>
         </div>
       </Link>
+      {recipe.imageCredit && (
+        <p className="recipe-photo-credit">
+          Photo by <a href={recipe.imageCredit.sourcePage} target="_blank" rel="noreferrer">{recipe.imageCredit.creator}</a>
+          {" · "}
+          <a href={recipe.imageCredit.licenseUrl} target="_blank" rel="noreferrer">{recipe.imageCredit.license}</a>
+        </p>
+      )}
     </article>
   );
 }

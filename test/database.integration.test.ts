@@ -107,6 +107,11 @@ describe.skipIf(!hasDatabaseUrl)("Neon persistence integration", () => {
       .toBe(CUISINES.length * CATEGORIES.length);
     expect(seededRecipes.every((recipe) => recipe.imageUrl.includes(".public.blob.vercel-storage.com/recipe-images/")))
       .toBe(true);
+    const individuallyPhotographed = seededRecipes.filter((recipe) =>
+      recipe.imageUrl.includes("/recipe-images/catalog/recipes/"),
+    );
+    expect(individuallyPhotographed).toHaveLength(37);
+    expect(new Set(individuallyPhotographed.map((recipe) => recipe.imageUrl)).size).toBe(37);
     await expect(getDb()`SELECT id FROM recipes WHERE id = '17d05c64-abd7-4639-851d-bd80b26190fa'`)
       .resolves.toEqual([]);
   }, 30_000);
