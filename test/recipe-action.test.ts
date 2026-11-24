@@ -46,7 +46,7 @@ describe("create recipe server action", () => {
     expect(state.errors.prepTimeMinutes).toBe(
       "Enter a whole number of minutes greater than zero.",
     );
-    expect(state.errors.imageUrl).toBe("Enter a valid image URL.");
+    expect(state.errors.imageUrl).toBe("Upload a food photo.");
     expect(addRecipeMock).not.toHaveBeenCalled();
     expect(revalidatePathMock).not.toHaveBeenCalled();
   });
@@ -58,7 +58,7 @@ describe("create recipe server action", () => {
 
     const state = await createRecipe({ errors: {} }, formData);
 
-    expect(state.errors.imageUrl).toBe("Enter a valid image URL.");
+    expect(state.errors.imageUrl).toBe("Upload a valid food photo.");
     expect(state.values).toEqual({
       authorName: "Sam Patel",
       title: "  My unfinished recipe  ",

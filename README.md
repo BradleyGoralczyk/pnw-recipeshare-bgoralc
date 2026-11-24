@@ -21,7 +21,7 @@ Requirements: Node.js 20.9 or newer and npm.
 npm ci
 ```
 
-Copy `.env.example` to `.env.local` and set `DATABASE_URL` to your Neon Postgres connection string. Keep the populated file private; it is ignored by Git. `POSTGRES_URL` is also accepted as a fallback by the server.
+Copy `.env.example` to `.env.local` and set `DATABASE_URL` to your Neon Postgres connection string and `BLOB_READ_WRITE_TOKEN` for Vercel Blob photo uploads. Keep the populated file private; it is ignored by Git. `POSTGRES_URL` is also accepted as a fallback by the server.
 
 ```sh
 npm run db:migrate
@@ -44,7 +44,7 @@ npm run build
 
 ## Deployment
 
-The Vercel project deploys pushes to `master`. Configure `DATABASE_URL` in Vercel Production and Preview environments; keep it out of source control. GitHub Actions runs tests, TypeScript checking, and the production build on pushes and pull requests targeting `master`. CI does not need database credentials; its database-only checks skip when no database URL is configured.
+The Vercel project deploys pushes to `master`. Configure `DATABASE_URL` and `BLOB_READ_WRITE_TOKEN` in Vercel Production, Preview, and Development environments; keep them out of source control. GitHub Actions runs tests, TypeScript checking, and the production build on pushes and pull requests targeting `master`. CI does not need service credentials; its database-only checks skip when no database URL is configured.
 
 Repository: [BradleyGoralczyk/pnw-recipeshare-bgoralc](https://github.com/BradleyGoralczyk/pnw-recipeshare-bgoralc)
 
@@ -65,7 +65,7 @@ Repository: [BradleyGoralczyk/pnw-recipeshare-bgoralc](https://github.com/Bradle
 - **S1 Google sign-in and profile - Not done.**
 - **S2 Author recipe editing and deletion - Not done.**
 - **S3 Fair, account-linked ratings - Not done:** ratings are anonymous as scoped for the Must features.
-- **S4 Photo uploads - Not done:** recipes use image URLs.
+- **S4 Photo uploads - Partly done:** visitors can upload public JPEG, PNG, and WebP images (maximum 5 MB) through Vercel Blob; finish configuring the Blob store and verify on the deployed app.
 - **S5 Keyword search - Done:** case-insensitive title and ingredient search combines with cuisine and category filters.
 - **S6 Recipe sorting - Done:** visitors can sort by newest or highest average rating.
 
@@ -80,6 +80,8 @@ Repository: [BradleyGoralczyk/pnw-recipeshare-bgoralc](https://github.com/Bradle
 - Other ideas - **Not done:** none added.
 
 ### Engineering requirements
+
+Visitor uploads are intentionally open and stored as public images. Anyone can request an upload token and consume the Blob allowance; upload count is not capped. Only JPEG, PNG, and WebP files up to 5 MB are allowed. Do not use this configuration for sensitive photos.
 
 - **E1 - Done:** public GitHub repository.
 - **E2 - Done:** agent instructions, product spec, and build plan are in the repository.

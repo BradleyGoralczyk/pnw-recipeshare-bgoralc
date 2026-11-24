@@ -41,7 +41,7 @@ Keep `npm test` as the single command for the complete test suite. Update this f
 - Never commit secrets, credentials, or populated `.env` files. Read secret values from environment variables; keep `.env.example` limited to variable names and safe descriptions.
 - Do not expose database credentials or privileged database access to browser code.
 - Use only free service plans for this assignment; do not add payment information or enable paid add-ons.
-- Recipe photos are food photos supplied by image URL; do not add photo uploads before the Must features are complete.
+- Recipe photos must depict food, not people. M1-M7 are complete; photo uploads may be added as the user prioritizes S4. Public visitor uploads must enforce a strict image type and size limit and their public-storage/abuse tradeoffs must be documented.
 - Do not begin Should or Could work until M1-M7 meet their acceptance criteria.
 - Keep changes focused and commits clear. Do not claim a feature passes unless it has been checked against its acceptance criterion.
 

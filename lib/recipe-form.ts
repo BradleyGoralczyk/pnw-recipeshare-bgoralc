@@ -103,17 +103,21 @@ export function validateRecipeForm(formData: FormData): RecipeFormValidation {
   }
 
   let parsedImageUrl: URL | undefined;
-  try {
-    parsedImageUrl = new URL(imageUrl);
-  } catch {
-    errors.imageUrl = "Enter a valid image URL.";
+  if (!imageUrl) {
+    errors.imageUrl = "Upload a food photo.";
+  } else {
+    try {
+      parsedImageUrl = new URL(imageUrl);
+    } catch {
+      errors.imageUrl = "Upload a valid food photo.";
+    }
   }
   if (
     parsedImageUrl &&
     parsedImageUrl.protocol !== "https:" &&
     parsedImageUrl.protocol !== "http:"
   ) {
-    errors.imageUrl = "Image URL must start with http:// or https://.";
+    errors.imageUrl = "Recipe photo URL must start with http:// or https://.";
   }
 
   let parsedVideoUrl: URL | null = null;

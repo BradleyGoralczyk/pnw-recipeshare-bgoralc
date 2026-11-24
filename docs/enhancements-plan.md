@@ -16,7 +16,7 @@ The product details in [`spec.md`](./spec.md) remain the source of truth. The us
 | S1 Google sign-in/profile | Blocked on setup | Auth.js can provide the integration, but a Google OAuth web client, its callback URLs, and private `AUTH_SECRET`, `AUTH_GOOGLE_ID`, and `AUTH_GOOGLE_SECRET` values are needed to exercise sign-in. |
 | S2 Edit/delete own recipes | Depends on S1 | Ownership checks must use the authenticated user ID on the server, not a browser-supplied author name. |
 | S3 Fair ratings | Depends on S1 | Enforcing one rating per user and preventing author ratings requires authenticated identity and a database migration. |
-| S4 Image uploads | Depends on S1 and storage setup | Vercel Blob can store uploaded photos, but its upload-token route must authenticate authors. It also requires a Blob store connected to the project and its private token configured. |
+| S4 Image uploads | Medium | Vercel Blob supports direct browser uploads; this user chose open visitor uploads without Google sign-in. Enforce supported image types and a strict size cap, and make the public storage/abuse tradeoff clear. A Blob store and token are still required. |
 | C Favorites on profile | Depends on S1 | A persistent per-user favorite list needs authenticated identities and a profile page. |
 
 Google OAuth redirect URLs to register when S1 is started:
@@ -36,7 +36,7 @@ Google requires OAuth client credentials and an exact redirect URI match. Keep a
 6. **C - Comments.** Add a comments table and anonymous name/body form with server validation, persistence, and detail-page display. Test validation, rendering, and database persistence.
 7. **S1 - Google sign-in/profile.** Once OAuth credentials are configured, add Auth.js Google sign-in/sign-out and a profile recipe list. Test callbacks/session handling with mocked provider/session data, then verify a real sign-in in the browser.
 8. **S2 and S3.** After S1 works, add server-enforced ownership for recipe edit/delete, then enforce signed-in ratings, rating replacement, and author-rating prohibition. Test direct unauthorized server-action calls as well as the UI.
-9. **S4 - Image uploads.** After S1 is working, connect a public Vercel Blob store, allow only safe image types and bounded sizes, authenticate upload-token requests, persist returned image URLs, and test the authorization/validation boundaries. Stay within the free Hobby usage limits.
+9. **S4 - Image uploads.** Connect a public Vercel Blob store, allow only JPEG/PNG/WebP images up to 5 MB, issue short-lived upload tokens for the recipe image namespace, persist returned image URLs, and test type/size/path boundaries. Uploads are intentionally open to visitors per user decision, without account authentication or an upload-count limit.
 10. **C - Favorites.** After S1, add persistent per-user favorites and a profile section, with database and authorization tests.
 
 ## Delivery and verification
@@ -51,4 +51,5 @@ Google requires OAuth client credentials and an exact redirect URI match. Keep a
 
 - **Implemented and pushed:** S5 keyword search and S6 sorting (`c2402ee`); servings scaler, optional video URL, and persisted dietary tags/filter (`18abf60`).
 - **Implemented and pushed:** anonymous comments with input validation, Neon persistence (migration `0003_recipe_comments.sql`), and recipe-detail display (`6ebba69`). Unit/component and database integration coverage passed; Vercel Production is READY and the live recipe detail page returned the comments form.
-- **Deferred for setup:** S1-S4 and C favorites, for the provider/auth and storage reasons above.
+- **Deferred for setup:** S1-S3 and C favorites, for the provider/auth reasons above.
+- **In progress:** S4 public image upload UI and constrained Blob token route are implemented locally. Finish after the user creates the public Blob store, configures `BLOB_READ_WRITE_TOKEN` for Development and Production, then verify the upload on the deployed app.

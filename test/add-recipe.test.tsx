@@ -4,6 +4,7 @@ import {
   render,
   screen,
   within,
+  waitFor,
 } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
@@ -15,6 +16,13 @@ import { submitRecipeForm } from "@/lib/recipe-submission";
 import { createRecipe } from "@/app/actions/recipes";
 import { recipeFixtures } from "@/test/fixtures/recipes";
 
+const { uploadMock } = vi.hoisted(() => ({
+  uploadMock: vi.fn(async () => ({
+    url: "https://sample.public.blob.vercel-storage.com/recipe-images/photo.png",
+  })),
+}));
+
+vi.mock("@vercel/blob/client", () => ({ upload: uploadMock }));
 vi.mock("@/app/actions/recipes", () => ({
   createRecipe: vi.fn(async () => ({ errors: {} })),
 }));
@@ -29,6 +37,10 @@ afterEach(() => {
   vi.mocked(addRecipe).mockResolvedValue(undefined);
   vi.mocked(getRecipes).mockReset();
   vi.mocked(getRecipes).mockResolvedValue(recipeFixtures);
+  uploadMock.mockReset();
+  uploadMock.mockResolvedValue({
+    url: "https://sample.public.blob.vercel-storage.com/recipe-images/photo.png",
+  });
 });
 
 function makeValidRecipeForm(): FormData {
@@ -55,7 +67,7 @@ describe("add recipe form", () => {
     expect(screen.getByLabelText("Ingredients")).toBeRequired();
     expect(screen.getByLabelText("Preparation steps")).toBeRequired();
     expect(screen.getByLabelText("Prep time in minutes")).toBeRequired();
-    expect(screen.getByLabelText("Image URL")).toBeRequired();
+    expect(screen.getByLabelText("Recipe photo")).toBeRequired();
     expect(screen.getByLabelText("Video URL (optional)")).not.toBeRequired();
     expect(screen.getByRole("checkbox", { name: "Vegetarian" })).not.toBeRequired();
 
@@ -72,6 +84,60 @@ describe("add recipe form", () => {
     expect(
       categoryOptions.slice(1).map((option) => option.textContent),
     ).toEqual([...CATEGORIES]);
+  });
+
+  it("uploads a selected food photo and stores its public Blob URL in the recipe form", async () => {
+    render(<RecipeForm />);
+    const photo = new File(["test image"], "meal.png", { type: "image/png" });
+
+    fireEvent.change(screen.getByLabelText("Recipe photo"), {
+      target: { files: [photo] },
+    });
+
+    await waitFor(() => {
+      expect(uploadMock).toHaveBeenCalledWith(
+        "recipe-images/recipe-photo",
+        photo,
+        expect.objectContaining({
+          access: "public",
+          contentType: "image/png",
+          handleUploadUrl: "/api/recipe-image/upload",
+        }),
+      );
+      expect(document.querySelector<HTMLInputElement>('input[name="imageUrl"]')).toHaveValue(
+        "https://sample.public.blob.vercel-storage.com/recipe-images/photo.png",
+      );
+    });
+  });
+
+  it("rejects unsupported files before they are uploaded", async () => {
+    render(<RecipeForm />);
+    const unsupported = new File(["not an image"], "meal.gif", { type: "image/gif" });
+
+    fireEvent.change(screen.getByLabelText("Recipe photo"), {
+      target: { files: [unsupported] },
+    });
+
+    expect(await screen.findByRole("alert")).toHaveTextContent(
+      "Choose a JPEG, PNG, or WebP image up to 5 MB.",
+    );
+    expect(uploadMock).not.toHaveBeenCalled();
+  });
+
+  it("rejects files larger than 5 MB before they are uploaded", async () => {
+    render(<RecipeForm />);
+    const oversized = new File([new Uint8Array(5 * 1024 * 1024 + 1)], "meal.png", {
+      type: "image/png",
+    });
+
+    fireEvent.change(screen.getByLabelText("Recipe photo"), {
+      target: { files: [oversized] },
+    });
+
+    expect(await screen.findByRole("alert")).toHaveTextContent(
+      "Choose a JPEG, PNG, or WebP image up to 5 MB.",
+    );
+    expect(uploadMock).not.toHaveBeenCalled();
   });
 
   it("reports every missing field and does not save an incomplete recipe", async () => {
@@ -114,7 +180,7 @@ describe("add recipe form", () => {
         ingredients: "Add at least one ingredient.",
         steps: "Add at least one preparation step.",
         prepTimeMinutes: "Enter a whole number of minutes greater than zero.",
-        imageUrl: "Enter a valid image URL.",
+        imageUrl: "Upload a food photo.",
       },
       values: {
         authorName: "Alex Rivera",
@@ -150,9 +216,6 @@ describe("add recipe form", () => {
     fireEvent.change(screen.getByLabelText("Prep time in minutes"), {
       target: { value: "25" },
     });
-    fireEvent.change(screen.getByLabelText("Image URL"), {
-      target: { value: "not a valid URL" },
-    });
     const form = screen
       .getByRole("button", { name: "Share recipe" })
       .closest("form");
@@ -165,7 +228,7 @@ describe("add recipe form", () => {
     expect(screen.getByText("Choose a category.")).toBeInTheDocument();
     expect(screen.getByText("Add at least one ingredient.")).toBeInTheDocument();
     expect(screen.getByText("Add at least one preparation step.")).toBeInTheDocument();
-    expect(screen.getByText("Enter a valid image URL.")).toBeInTheDocument();
+    expect(screen.getByText("Upload a food photo.")).toBeInTheDocument();
     expect(screen.getByLabelText("Recipe title")).toHaveAttribute(
       "aria-invalid",
       "true",
@@ -181,7 +244,7 @@ describe("add recipe form", () => {
       "Rinse the rice.",
     );
     expect(screen.getByLabelText("Prep time in minutes")).toHaveValue(25);
-    expect(screen.getByLabelText("Image URL")).toHaveValue("not a valid URL");
+    expect(screen.getByLabelText("Recipe photo")).toBeRequired();
   });
 
   it("saves a complete recipe and shows its card on the home page", async () => {

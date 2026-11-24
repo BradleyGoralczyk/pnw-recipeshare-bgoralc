@@ -1,5 +1,6 @@
 "use client";
 
+import { upload } from "@vercel/blob/client";
 import { useActionState, useState } from "react";
 
 import {
@@ -7,6 +8,7 @@ import {
   type RecipeFormState,
 } from "@/app/actions/recipes";
 import type { RecipeFormField } from "@/lib/recipe-form";
+import { isAllowedRecipeImage, MAX_RECIPE_IMAGE_SIZE_BYTES } from "@/lib/recipe-image";
 import { CATEGORIES, CUISINES, DIETARY_TAGS, type DietaryTag } from "@/lib/recipe-model";
 
 const initialState: RecipeFormState = { errors: {} };
@@ -19,7 +21,7 @@ const fieldLabels: Record<RecipeFormField, string> = {
   ingredients: "Ingredients",
   steps: "Preparation steps",
   prepTimeMinutes: "Prep time in minutes",
-  imageUrl: "Image URL",
+  imageUrl: "Recipe photo",
   videoUrl: "Video URL",
   dietaryTags: "Dietary tags",
 };
@@ -37,6 +39,8 @@ export function RecipeForm() {
     videoUrl: "",
   });
   const [selectedDietaryTags, setSelectedDietaryTags] = useState<DietaryTag[]>([]);
+  const [imageUploading, setImageUploading] = useState(false);
+  const [imageUploadError, setImageUploadError] = useState("");
   const [state, formAction, isPending] = useActionState(
     createRecipe,
     initialState,
@@ -67,6 +71,30 @@ export function RecipeForm() {
 
   function updateDraft(field: RecipeFormField, value: string) {
     setDraft((currentDraft) => ({ ...currentDraft, [field]: value }));
+  }
+
+  async function uploadRecipePhoto(file: File) {
+    updateDraft("imageUrl", "");
+    setImageUploadError("");
+
+    if (!isAllowedRecipeImage(file)) {
+      setImageUploadError("Choose a JPEG, PNG, or WebP image up to 5 MB.");
+      return;
+    }
+
+    setImageUploading(true);
+    try {
+      const blob = await upload("recipe-images/recipe-photo", file, {
+        access: "public",
+        contentType: file.type,
+        handleUploadUrl: "/api/recipe-image/upload",
+      });
+      updateDraft("imageUrl", blob.url);
+    } catch {
+      setImageUploadError("The photo could not be uploaded. Please try again.");
+    } finally {
+      setImageUploading(false);
+    }
   }
 
   return (
@@ -185,16 +213,29 @@ export function RecipeForm() {
         </div>
 
         <div className="form-field">
-          <label htmlFor="imageUrl">{fieldLabels.imageUrl}</label>
+          <label htmlFor="recipePhoto">{fieldLabels.imageUrl}</label>
           <input
-            {...fieldProps("imageUrl")}
-            autoCapitalize="none"
-            onChange={(event) => updateDraft("imageUrl", event.target.value)}
-            value={draft.imageUrl}
-            placeholder="https://example.com/food-photo.jpg"
-            type="url"
+            aria-describedby={state.errors.imageUrl ? "imageUrl-error" : undefined}
+            aria-invalid={Boolean(state.errors.imageUrl)}
+            accept="image/jpeg,image/png,image/webp"
+            disabled={imageUploading || isPending}
+            id="recipePhoto"
+            onChange={(event) => {
+              const file = event.target.files?.[0];
+              if (file) void uploadRecipePhoto(file);
+            }}
+            required
+            type="file"
           />
-          <span className="field-hint">Link to a food photo (no people).</span>
+          <input name="imageUrl" type="hidden" value={draft.imageUrl} />
+          <span className="field-hint">
+            Upload a food photo (JPEG, PNG, or WebP; max{" "}
+            {MAX_RECIPE_IMAGE_SIZE_BYTES / 1024 / 1024} MB).
+            Photos of people are not allowed. Uploaded photos are public, and
+            uploads are open to all visitors.
+          </span>
+          {imageUploading && <p role="status">Uploading photo…</p>}
+          {imageUploadError && <p className="field-error" role="alert">{imageUploadError}</p>}
           {errorFor("imageUrl")}
         </div>
         <div className="form-field">
@@ -237,8 +278,10 @@ export function RecipeForm() {
       </div>
 
       <div className="form-actions">
-        <p className="form-required-note">All fields except video and dietary tags are required.</p>
-        <button className="submit-button" disabled={isPending} type="submit">
+        <p className="form-required-note">
+          All fields except video and dietary tags are required.
+        </p>
+        <button className="submit-button" disabled={isPending || imageUploading} type="submit">
           {isPending ? "Saving recipe…" : "Share recipe"}
         </button>
       </div>
