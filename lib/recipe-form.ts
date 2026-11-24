@@ -1,8 +1,10 @@
 import {
   CATEGORIES,
   CUISINES,
+  DIETARY_TAGS,
   type Category,
   type Cuisine,
+  type DietaryTag,
   type Recipe,
 } from "@/lib/recipe-model";
 
@@ -14,7 +16,9 @@ export type RecipeFormField =
   | "ingredients"
   | "steps"
   | "prepTimeMinutes"
-  | "imageUrl";
+  | "imageUrl"
+  | "videoUrl"
+  | "dietaryTags";
 
 export type RecipeFormErrors = Partial<Record<RecipeFormField, string>>;
 
@@ -38,6 +42,10 @@ function isCategory(value: string): value is Category {
   return (CATEGORIES as readonly string[]).includes(value);
 }
 
+function isDietaryTag(value: string): value is DietaryTag {
+  return (DIETARY_TAGS as readonly string[]).includes(value);
+}
+
 function readList(formData: FormData, field: "ingredients" | "steps"): string[] {
   return readText(formData, field)
     .split(/\r?\n/)
@@ -55,6 +63,11 @@ export function validateRecipeForm(formData: FormData): RecipeFormValidation {
   const steps = readList(formData, "steps");
   const prepTimeValue = readText(formData, "prepTimeMinutes");
   const imageUrl = readText(formData, "imageUrl");
+  const videoUrlValue = readText(formData, "videoUrl");
+  const dietaryTagValues = formData.getAll("dietaryTags");
+  const dietaryTags = [...new Set(dietaryTagValues.filter(
+    (value): value is string => typeof value === "string",
+  ))];
 
   if (!authorName) errors.authorName = "Author name is required.";
   if (!title) errors.title = "Recipe title is required.";
@@ -103,6 +116,31 @@ export function validateRecipeForm(formData: FormData): RecipeFormValidation {
     errors.imageUrl = "Image URL must start with http:// or https://.";
   }
 
+  let parsedVideoUrl: URL | null = null;
+  if (videoUrlValue) {
+    try {
+      parsedVideoUrl = new URL(videoUrlValue);
+    } catch {
+      errors.videoUrl = "Enter a valid video URL or leave the field empty.";
+    }
+    if (
+      parsedVideoUrl &&
+      parsedVideoUrl.protocol !== "https:" &&
+      parsedVideoUrl.protocol !== "http:"
+    ) {
+      errors.videoUrl = "Video URL must start with http:// or https://.";
+    }
+  }
+
+  const validatedDietaryTags: DietaryTag[] = [];
+  for (const tag of dietaryTags) {
+    if (!isDietaryTag(tag)) {
+      errors.dietaryTags = "Choose dietary tags from the available options.";
+      continue;
+    }
+    validatedDietaryTags.push(tag);
+  }
+
   if (
     Object.keys(errors).length > 0 ||
     !cuisine ||
@@ -122,6 +160,8 @@ export function validateRecipeForm(formData: FormData): RecipeFormValidation {
       steps,
       prepTimeMinutes,
       imageUrl: parsedImageUrl.href,
+      videoUrl: parsedVideoUrl?.href ?? null,
+      dietaryTags: validatedDietaryTags,
     },
     errors: {},
   };

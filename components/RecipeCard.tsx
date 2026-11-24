@@ -30,11 +30,16 @@ export function RecipeCard({ recipe }: { recipe: Recipe }) {
           />
         </div>
         <div className="recipe-card-content">
-          <div className="recipe-tags" aria-label="Recipe cuisine and category">
+          <div className="recipe-tags" aria-label="Recipe cuisine, category, and dietary tags">
             <span className="recipe-tag">{recipe.cuisine}</span>
             <span className="recipe-tag recipe-tag-secondary">
               {recipe.category}
             </span>
+            {recipe.dietaryTags.map((tag) => (
+              <span className="recipe-tag recipe-tag-dietary" key={tag}>
+                {tag}
+              </span>
+            ))}
           </div>
           <h3 className="recipe-title">{recipe.title}</h3>
           <p className="recipe-rating" aria-label={ratingLabel}>

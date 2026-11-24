@@ -28,6 +28,8 @@ function makeValidRecipeForm(): FormData {
   formData.set("steps", "Bring milk to a simmer.\nStir in oats and cardamom.");
   formData.set("prepTimeMinutes", "15");
   formData.set("imageUrl", "https://example.com/cardamom-oats.jpg");
+  formData.set("videoUrl", "https://www.youtube.com/watch?v=example");
+  formData.append("dietaryTags", "Vegan");
   return formData;
 }
 
@@ -66,6 +68,8 @@ describe("create recipe server action", () => {
       steps: "Bring milk to a simmer.\nStir in oats and cardamom.",
       prepTimeMinutes: "15",
       imageUrl: "not a URL yet",
+      videoUrl: "https://www.youtube.com/watch?v=example",
+      dietaryTags: "Vegan",
     });
   });
 

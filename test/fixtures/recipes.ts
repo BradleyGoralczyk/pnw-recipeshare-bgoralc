@@ -13,6 +13,8 @@ export const recipeFixtures: Recipe[] = [
     imageUrl: "https://example.com/chickpea-curry.jpg",
     imageAlt: "A colorful bowl of curry with fresh greens",
     ratings: [5, 4, 5, 5, 4, 5],
+    videoUrl: "https://www.youtube.com/watch?v=sample",
+    dietaryTags: ["Vegetarian", "Gluten-free"],
   },
   {
     id: "steamed-dumplings",
@@ -26,6 +28,8 @@ export const recipeFixtures: Recipe[] = [
     imageUrl: "https://example.com/vegetable-dumplings.jpg",
     imageAlt: "Steamed dumplings arranged on a plate",
     ratings: [4, 5, 5, 4, 5],
+    videoUrl: null,
+    dietaryTags: [],
   },
   {
     id: "shoyu-ramen",
@@ -39,5 +43,7 @@ export const recipeFixtures: Recipe[] = [
     imageUrl: "https://example.com/shoyu-ramen.jpg",
     imageAlt: "A steaming bowl of ramen topped with noodles and garnish",
     ratings: [5, 5, 4, 5, 4, 5, 5],
+    videoUrl: null,
+    dietaryTags: ["Dairy-free"],
   },
 ];

@@ -6,10 +6,12 @@ import { RecipeCard } from "@/components/RecipeCard";
 import {
   CATEGORIES,
   CUISINES,
+  DIETARY_TAGS,
   filterRecipes,
   sortRecipes,
   type Category,
   type Cuisine,
+  type DietaryTag,
   type Recipe,
   type RecipeSort,
 } from "@/lib/recipe-model";
@@ -19,8 +21,9 @@ export function RecipeFilters({ recipes }: { recipes: Recipe[] }) {
   const [category, setCategory] = useState<Category | "">("");
   const [keyword, setKeyword] = useState("");
   const [sort, setSort] = useState<RecipeSort>("newest");
+  const [dietaryTags, setDietaryTags] = useState<DietaryTag[]>([]);
   const matchingRecipes = sortRecipes(
-    filterRecipes(recipes, cuisine, category, keyword),
+    filterRecipes(recipes, cuisine, category, keyword, dietaryTags),
     sort,
   );
 
@@ -29,6 +32,15 @@ export function RecipeFilters({ recipes }: { recipes: Recipe[] }) {
     setCategory("");
     setKeyword("");
     setSort("newest");
+    setDietaryTags([]);
+  }
+
+  function toggleDietaryTag(tag: DietaryTag) {
+    setDietaryTags((current) =>
+      current.includes(tag)
+        ? current.filter((item) => item !== tag)
+        : [...current, tag],
+    );
   }
 
   return (
@@ -90,6 +102,21 @@ export function RecipeFilters({ recipes }: { recipes: Recipe[] }) {
             <option value="highest-rated">Highest rated</option>
           </select>
         </div>
+        <fieldset className="filter-tag-field">
+          <legend>Dietary tags</legend>
+          {DIETARY_TAGS.map((tag) => (
+            <label key={tag}>
+              <input
+                checked={dietaryTags.includes(tag)}
+                name="dietaryTags"
+                onChange={() => toggleDietaryTag(tag)}
+                type="checkbox"
+                value={tag}
+              />
+              {tag}
+            </label>
+          ))}
+        </fieldset>
         <button className="clear-filters-button" onClick={clearFilters} type="button">
           Clear filters and search
         </button>

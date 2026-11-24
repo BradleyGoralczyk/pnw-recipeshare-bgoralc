@@ -41,6 +41,8 @@ function makeValidRecipeForm(): FormData {
   formData.set("steps", "Rinse the rice.\nCook until tender.\nAdd lemon and herbs.");
   formData.set("prepTimeMinutes", "25");
   formData.set("imageUrl", "https://example.com/lemon-rice.jpg");
+  formData.set("videoUrl", "https://www.youtube.com/watch?v=example");
+  formData.append("dietaryTags", "Vegetarian");
   return formData;
 }
 
@@ -54,6 +56,8 @@ describe("add recipe form", () => {
     expect(screen.getByLabelText("Preparation steps")).toBeRequired();
     expect(screen.getByLabelText("Prep time in minutes")).toBeRequired();
     expect(screen.getByLabelText("Image URL")).toBeRequired();
+    expect(screen.getByLabelText("Video URL (optional)")).not.toBeRequired();
+    expect(screen.getByRole("checkbox", { name: "Vegetarian" })).not.toBeRequired();
 
     const cuisineOptions = within(
       screen.getByRole("combobox", { name: "Cuisine" }),
@@ -84,6 +88,19 @@ describe("add recipe form", () => {
       prepTimeMinutes: expect.any(String),
       imageUrl: expect.any(String),
     });
+    expect(addRecipe).not.toHaveBeenCalled();
+  });
+
+  it("rejects unsafe video links and unknown dietary tags on the server", async () => {
+    const formData = makeValidRecipeForm();
+    formData.set("videoUrl", "javascript:alert(1)");
+    formData.append("dietaryTags", "Made-up tag");
+
+    const result = await submitRecipeForm(formData);
+
+    expect(result.recipe).toBeNull();
+    expect(result.errors.videoUrl).toBe("Video URL must start with http:// or https://.");
+    expect(result.errors.dietaryTags).toBe("Choose dietary tags from the available options.");
     expect(addRecipe).not.toHaveBeenCalled();
   });
 
@@ -175,6 +192,10 @@ describe("add recipe form", () => {
     if (!result.recipe) throw new Error("Expected the valid recipe to be saved");
 
     expect(addRecipe).toHaveBeenCalledWith(result.recipe);
+    expect(result.recipe).toMatchObject({
+      videoUrl: "https://www.youtube.com/watch?v=example",
+      dietaryTags: ["Vegetarian"],
+    });
     vi.mocked(getRecipes).mockResolvedValue([result.recipe, ...recipeFixtures]);
     render(await HomePage());
 

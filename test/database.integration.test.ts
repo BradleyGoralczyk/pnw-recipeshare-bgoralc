@@ -33,6 +33,8 @@ describe.skipIf(!hasDatabaseUrl)("Neon persistence integration", () => {
       imageUrl: "https://example.com/neon-persistence.jpg",
       imageAlt: "A bowl of rice",
       ratings: [],
+      videoUrl: "https://www.youtube.com/watch?v=example",
+      dietaryTags: ["Gluten-free", "Dairy-free"] as ("Gluten-free" | "Dairy-free")[],
     };
 
     await addRecipe(recipe);

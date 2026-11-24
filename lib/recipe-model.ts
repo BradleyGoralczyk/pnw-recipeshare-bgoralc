@@ -22,8 +22,17 @@ export const CATEGORIES = [
   "Drink",
 ] as const;
 
+export const DIETARY_TAGS = [
+  "Vegetarian",
+  "Vegan",
+  "Gluten-free",
+  "Dairy-free",
+  "Nut-free",
+] as const;
+
 export type Cuisine = (typeof CUISINES)[number];
 export type Category = (typeof CATEGORIES)[number];
+export type DietaryTag = (typeof DIETARY_TAGS)[number];
 export type RecipeSort = "newest" | "highest-rated";
 
 export interface Recipe {
@@ -38,6 +47,8 @@ export interface Recipe {
   imageUrl: string;
   imageAlt: string;
   ratings: number[];
+  videoUrl: string | null;
+  dietaryTags: DietaryTag[];
 }
 
 export function getAverageRating(ratings: number[]): number | null {
@@ -52,6 +63,7 @@ export function filterRecipes(
   cuisine: Cuisine | "",
   category: Category | "",
   keyword = "",
+  dietaryTags: DietaryTag[] = [],
 ): Recipe[] {
   const normalizedKeyword = keyword.trim().toLocaleLowerCase();
 
@@ -63,7 +75,8 @@ export function filterRecipes(
         recipe.title.toLocaleLowerCase().includes(normalizedKeyword) ||
         recipe.ingredients.some((ingredient) =>
           ingredient.toLocaleLowerCase().includes(normalizedKeyword),
-        )),
+        )) &&
+      dietaryTags.every((tag) => recipe.dietaryTags.includes(tag)),
   );
 }
 

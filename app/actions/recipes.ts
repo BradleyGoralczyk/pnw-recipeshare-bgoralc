@@ -20,15 +20,22 @@ const formFields = [
   "steps",
   "prepTimeMinutes",
   "imageUrl",
+  "videoUrl",
 ] as const;
 
 function readFormValues(formData: FormData): Record<string, string> {
-  return Object.fromEntries(
+  return {
+    ...Object.fromEntries(
     formFields.map((field) => {
       const value = formData.get(field);
       return [field, typeof value === "string" ? value : ""];
     }),
-  );
+    ),
+    dietaryTags: formData
+      .getAll("dietaryTags")
+      .filter((value): value is string => typeof value === "string")
+      .join(", "),
+  };
 }
 
 export async function createRecipe(

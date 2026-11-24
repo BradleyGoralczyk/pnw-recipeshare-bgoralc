@@ -59,6 +59,16 @@ describe("recipe filters", () => {
     expect(sortRecipes(testRecipes, "newest")).toEqual(testRecipes);
   });
 
+  it("combines multiple dietary tags with cuisine, category, and keyword filters", () => {
+    expect(
+      filterRecipes(testRecipes, "Iranian", "Main Dish", "rice", [
+        "Vegetarian",
+        "Gluten-free",
+      ]).map((recipe) => recipe.id),
+    ).toEqual(["iranian-main"]);
+    expect(filterRecipes(testRecipes, "", "", "", ["Vegan"])).toEqual([]);
+  });
+
   it("lets visitors combine, clear, and apply filters with a no-match message", () => {
     render(<RecipeFilters recipes={testRecipes} />);
 
@@ -82,6 +92,12 @@ describe("recipe filters", () => {
     expect(screen.getByLabelText("Cuisine")).toHaveValue("");
     expect(screen.getByLabelText("Category")).toHaveValue("");
     expect(screen.getByRole("searchbox", { name: "Search recipes" })).toHaveValue("");
+    expect(screen.getByRole("checkbox", { name: "Vegetarian" })).not.toBeChecked();
+
+    fireEvent.click(screen.getByRole("checkbox", { name: "Vegetarian" }));
+    expect(screen.getAllByRole("article")).toHaveLength(1);
+    expect(screen.getByRole("article", { name: "Iranian Rice Pilaf" })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Clear filters and search" }));
 
     fireEvent.change(screen.getByLabelText("Sort by"), {
       target: { value: "highest-rated" },

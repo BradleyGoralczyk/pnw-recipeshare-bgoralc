@@ -7,7 +7,7 @@ import {
   type RecipeFormState,
 } from "@/app/actions/recipes";
 import type { RecipeFormField } from "@/lib/recipe-form";
-import { CATEGORIES, CUISINES } from "@/lib/recipe-model";
+import { CATEGORIES, CUISINES, DIETARY_TAGS, type DietaryTag } from "@/lib/recipe-model";
 
 const initialState: RecipeFormState = { errors: {} };
 
@@ -20,6 +20,8 @@ const fieldLabels: Record<RecipeFormField, string> = {
   steps: "Preparation steps",
   prepTimeMinutes: "Prep time in minutes",
   imageUrl: "Image URL",
+  videoUrl: "Video URL",
+  dietaryTags: "Dietary tags",
 };
 
 export function RecipeForm() {
@@ -32,7 +34,9 @@ export function RecipeForm() {
     steps: "",
     prepTimeMinutes: "",
     imageUrl: "",
+    videoUrl: "",
   });
+  const [selectedDietaryTags, setSelectedDietaryTags] = useState<DietaryTag[]>([]);
   const [state, formAction, isPending] = useActionState(
     createRecipe,
     initialState,
@@ -49,7 +53,7 @@ export function RecipeForm() {
     );
   }
 
-  function fieldProps(field: RecipeFormField) {
+  function fieldProps(field: RecipeFormField, required = true) {
     const hasError = Boolean(state.errors[field]);
 
     return {
@@ -57,7 +61,7 @@ export function RecipeForm() {
       "aria-describedby": hasError ? `${field}-error` : undefined,
       id: field,
       name: field,
-      required: true,
+      required,
     };
   }
 
@@ -193,10 +197,47 @@ export function RecipeForm() {
           <span className="field-hint">Link to a food photo (no people).</span>
           {errorFor("imageUrl")}
         </div>
+        <div className="form-field">
+          <label htmlFor="videoUrl">{fieldLabels.videoUrl} (optional)</label>
+          <input
+            {...fieldProps("videoUrl", false)}
+            autoCapitalize="none"
+            onChange={(event) => updateDraft("videoUrl", event.target.value)}
+            placeholder="https://www.youtube.com/watch?v=..."
+            type="url"
+            value={draft.videoUrl}
+          />
+          <span className="field-hint">Link to a video showing how to make it.</span>
+          {errorFor("videoUrl")}
+        </div>
+        <fieldset className="form-tag-field form-tag-field-form">
+          <legend>{fieldLabels.dietaryTags} (optional)</legend>
+          <div className="form-tag-options">
+            {DIETARY_TAGS.map((tag) => (
+              <label key={tag}>
+                <input
+                  checked={selectedDietaryTags.includes(tag)}
+                  name="dietaryTags"
+                  onChange={() =>
+                    setSelectedDietaryTags((current) =>
+                      current.includes(tag)
+                        ? current.filter((item) => item !== tag)
+                        : [...current, tag],
+                    )
+                  }
+                  type="checkbox"
+                  value={tag}
+                />
+                {tag}
+              </label>
+            ))}
+          </div>
+          {errorFor("dietaryTags")}
+        </fieldset>
       </div>
 
       <div className="form-actions">
-        <p className="form-required-note">All fields are required.</p>
+        <p className="form-required-note">All fields except video and dietary tags are required.</p>
         <button className="submit-button" disabled={isPending} type="submit">
           {isPending ? "Saving recipe…" : "Share recipe"}
         </button>

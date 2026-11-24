@@ -28,6 +28,11 @@ describe("recipe detail page", () => {
     expect(screen.getByText(recipe.authorName)).toBeInTheDocument();
     expect(screen.getByText(recipe.cuisine)).toBeInTheDocument();
     expect(screen.getByText(recipe.category)).toBeInTheDocument();
+    expect(screen.getByText("Vegetarian")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Watch recipe video" })).toHaveAttribute(
+      "href",
+      recipe.videoUrl,
+    );
     expect(
       screen.getByRole("img", { name: recipe.imageAlt }),
     ).toBeInTheDocument();

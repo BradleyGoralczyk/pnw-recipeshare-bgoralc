@@ -6,6 +6,7 @@ import { isRecipeImageOptimizable } from "@/lib/image-url";
 import { getAverageRating } from "@/lib/recipe-model";
 import { getRecipeById } from "@/lib/recipes";
 import { RatingControl } from "@/components/RatingControl";
+import { ServingsScaler } from "@/components/ServingsScaler";
 
 export const dynamic = "force-dynamic";
 
@@ -33,11 +34,14 @@ export default async function RecipeDetailsPage({
 
       <article className="recipe-detail">
         <div className="recipe-detail-copy">
-          <div className="recipe-tags" aria-label="Recipe cuisine and category">
+          <div className="recipe-tags" aria-label="Recipe cuisine, category, and dietary tags">
             <span className="recipe-tag">{recipe.cuisine}</span>
             <span className="recipe-tag recipe-tag-secondary">
               {recipe.category}
             </span>
+            {recipe.dietaryTags.map((tag) => (
+              <span className="recipe-tag recipe-tag-dietary" key={tag}>{tag}</span>
+            ))}
           </div>
 
           <h1>{recipe.title}</h1>
@@ -74,14 +78,17 @@ export default async function RecipeDetailsPage({
             </p>
           </div>
           <RatingControl recipeId={recipe.id} />
+          {recipe.videoUrl && (
+            <p className="recipe-video-link">
+              <a href={recipe.videoUrl} rel="noreferrer" target="_blank">
+                Watch recipe video
+              </a>
+            </p>
+          )}
 
           <section className="detail-section" aria-labelledby="ingredients-heading">
             <h2 id="ingredients-heading">Ingredients</h2>
-            <ul className="ingredient-list">
-              {recipe.ingredients.map((ingredient) => (
-                <li key={ingredient}>{ingredient}</li>
-              ))}
-            </ul>
+            <ServingsScaler ingredients={recipe.ingredients} />
           </section>
 
           <section className="detail-section" aria-labelledby="steps-heading">

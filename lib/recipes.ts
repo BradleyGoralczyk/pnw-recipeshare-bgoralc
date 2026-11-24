@@ -4,8 +4,10 @@ import { getDb } from "@/lib/db";
 import {
   CATEGORIES,
   CUISINES,
+  DIETARY_TAGS,
   type Category,
   type Cuisine,
+  type DietaryTag,
   type Recipe,
 } from "@/lib/recipe-model";
 
@@ -38,6 +40,14 @@ function readRatings(value: unknown): number[] {
   return parsed;
 }
 
+function readDietaryTags(value: unknown): DietaryTag[] {
+  const tags = readStringList(value, "dietary tags");
+  if (!tags.every((tag) => (DIETARY_TAGS as readonly string[]).includes(tag))) {
+    throw new Error("Database returned an unsupported recipe dietary tag.");
+  }
+  return tags as DietaryTag[];
+}
+
 function toRecipe(row: RecipeRow): Recipe {
   const cuisine = readString(row, "cuisine");
   const category = readString(row, "category");
@@ -65,6 +75,11 @@ function toRecipe(row: RecipeRow): Recipe {
     imageUrl: readString(row, "imageUrl"),
     imageAlt: readString(row, "imageAlt"),
     ratings: readRatings(row.ratings),
+    videoUrl:
+      row.videoUrl === null || typeof row.videoUrl === "string"
+        ? row.videoUrl
+        : (() => { throw new Error("Database returned an invalid recipe video URL."); })(),
+    dietaryTags: readDietaryTags(row.dietaryTags),
   };
 }
 
@@ -80,6 +95,8 @@ const recipeSelect = `
     recipe.prep_time_minutes AS "prepTimeMinutes",
     recipe.image_url AS "imageUrl",
     recipe.image_alt AS "imageAlt",
+    recipe.video_url AS "videoUrl",
+    recipe.dietary_tags AS "dietaryTags",
     COALESCE(
       (
         SELECT json_agg(rating.value ORDER BY rating.created_at, rating.id)
@@ -120,7 +137,9 @@ export async function addRecipe(recipe: Recipe): Promise<void> {
       steps,
       prep_time_minutes,
       image_url,
-      image_alt
+      image_alt,
+      video_url,
+      dietary_tags
     )
     VALUES (
       ${recipe.id},
@@ -132,7 +151,9 @@ export async function addRecipe(recipe: Recipe): Promise<void> {
       ${JSON.stringify(recipe.steps)}::jsonb,
       ${recipe.prepTimeMinutes},
       ${recipe.imageUrl},
-      ${recipe.imageAlt}
+      ${recipe.imageAlt},
+      ${recipe.videoUrl},
+      ${JSON.stringify(recipe.dietaryTags)}::jsonb
     )
   `;
 }

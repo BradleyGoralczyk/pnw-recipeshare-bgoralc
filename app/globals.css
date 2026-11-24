@@ -240,6 +240,53 @@ h2 {
   padding: 0.55rem 0.75rem;
 }
 
+.filter-tag-field,
+.form-tag-field {
+  border: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 0.8rem;
+  margin: 0;
+  min-width: 0;
+  padding: 0;
+}
+
+.filter-tag-field legend,
+.form-tag-field legend {
+  color: var(--ink);
+  font-size: 0.88rem;
+  font-weight: 650;
+  margin-bottom: 0.45rem;
+  width: 100%;
+}
+
+.filter-tag-field label,
+.form-tag-options label {
+  align-items: center;
+  color: var(--muted);
+  display: inline-flex;
+  font-size: 0.85rem;
+  gap: 0.35rem;
+}
+
+.filter-tag-field input,
+.form-tag-options input {
+  accent-color: var(--accent-dark);
+  height: 1rem;
+  margin: 0;
+  width: 1rem;
+}
+
+.form-tag-field-form {
+  grid-column: 1 / -1;
+}
+
+.form-tag-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 1rem;
+}
+
 .clear-filters-button {
   background: transparent;
   border: 1px solid var(--line);
@@ -331,6 +378,11 @@ h2 {
 .recipe-tag-secondary {
   background: #f5e7dd;
   color: #985038;
+}
+
+.recipe-tag-dietary {
+  background: #e8eddf;
+  color: #536a4c;
 }
 
 .recipe-title {
@@ -502,6 +554,41 @@ h2 {
   display: flex;
   gap: 0.45rem;
   margin: 0;
+}
+
+.recipe-video-link {
+  margin: 0.9rem 0 1rem;
+}
+
+.recipe-video-link a {
+  color: var(--accent-dark);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.servings-control {
+  align-items: center;
+  display: flex;
+  gap: 0.7rem;
+  margin-top: 1rem;
+}
+
+.servings-control label {
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 650;
+}
+
+.servings-control input {
+  background: #fffefa;
+  border: 1px solid var(--line);
+  border-radius: 0.5rem;
+  color: var(--ink);
+  font: inherit;
+  min-height: 2.4rem;
+  padding: 0.35rem 0.6rem;
+  width: 5.5rem;
 }
 
 .detail-prep-time {

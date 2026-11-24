@@ -73,9 +73,9 @@ Repository: [BradleyGoralczyk/pnw-recipeshare-bgoralc](https://github.com/Bradle
 
 - Comments - **Not done.**
 - Favorites on a profile - **Not done.**
-- Servings scaler - **Not done.**
-- Recipe video link - **Not done.**
-- Dietary tags and filtering - **Not done.**
+- Servings scaler - **Done:** detail pages scale leading ingredient quantities from four servings.
+- Recipe video link - **Done:** recipes can include an optional validated video URL.
+- Dietary tags and filtering - **Done:** fixed tags are persisted and can be combined with cuisine, category, and keyword filters.
 - Phone-friendly layout - **Done:** responsive layout breakpoints are included.
 - Other ideas - **Not done:** none added.
 
