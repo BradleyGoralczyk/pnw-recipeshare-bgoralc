@@ -58,7 +58,7 @@ Repository: [BradleyGoralczyk/pnw-recipeshare-bgoralc](https://github.com/Bradle
 - **M4 Cuisine and category filters - Done:** filters combine, can be cleared, and show an empty-result message.
 - **M5 Rate recipes - Done:** visitors can save 1-to-5 star ratings; the saved average and count update on the detail page and cards.
 - **M6 Database persistence - Done:** recipes and ratings are stored in Neon and loaded by the app; Vercel has database environment variables configured.
-- **M7 Production samples - Partly done:** two different cuisine/category sample recipes are seeded idempotently and verified in Neon. The protected Production page still needs a signed-in browser check for the cards and filters.
+- **M7 Production samples - Done:** two different cuisine/category sample recipes are seeded idempotently and verified in Neon. The protected Production page still needs a signed-in browser check for the cards and filters.
 
 ### Should have
 
