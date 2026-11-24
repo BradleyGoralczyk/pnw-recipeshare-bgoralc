@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { RecipeCard } from "@/components/RecipeCard";
+import { RecipeFilters } from "@/components/RecipeFilters";
 import { recipes } from "@/lib/recipes";
 
 export default function HomePage() {
@@ -36,11 +36,7 @@ export default function HomePage() {
           </div>
           <p className="section-note">A few favorites to get you started</p>
         </div>
-        <div className="recipe-grid">
-          {recipes.map((recipe) => (
-            <RecipeCard key={recipe.id} recipe={recipe} />
-          ))}
-        </div>
+        <RecipeFilters recipes={recipes} />
       </section>
     </main>
   );

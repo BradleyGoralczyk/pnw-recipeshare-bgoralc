@@ -205,6 +205,66 @@ h2 {
   margin: 0 0 0.2rem 1rem;
 }
 
+.recipe-filters {
+  align-items: end;
+  background: #f4f0e8;
+  border: 1px solid var(--line);
+  border-radius: 0.9rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-bottom: 1.25rem;
+  padding: 1rem;
+}
+
+.filter-field {
+  display: grid;
+  gap: 0.35rem;
+  min-width: 190px;
+}
+
+.filter-field label {
+  color: var(--ink);
+  font-size: 0.88rem;
+  font-weight: 650;
+}
+
+.filter-field select {
+  background: #fffefa;
+  border: 1px solid var(--line);
+  border-radius: 0.55rem;
+  color: var(--ink);
+  font: inherit;
+  min-height: 2.7rem;
+  padding: 0.55rem 0.75rem;
+}
+
+.clear-filters-button {
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 0.55rem;
+  color: var(--accent-dark);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 650;
+  min-height: 2.7rem;
+  padding: 0.55rem 0.85rem;
+}
+
+.clear-filters-button:hover {
+  background: #fffefa;
+}
+
+.no-recipes-message {
+  background: #fffefa;
+  border: 1px dashed var(--line);
+  border-radius: 0.9rem;
+  color: var(--muted);
+  margin: 0;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
 .recipe-grid {
   display: grid;
   gap: 1.25rem;

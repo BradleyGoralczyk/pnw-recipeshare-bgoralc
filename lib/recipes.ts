@@ -39,6 +39,18 @@ export interface Recipe {
   ratings: number[];
 }
 
+export function filterRecipes(
+  recipeList: Recipe[],
+  cuisine: Cuisine | "",
+  category: Category | "",
+): Recipe[] {
+  return recipeList.filter(
+    (recipe) =>
+      (!cuisine || recipe.cuisine === cuisine) &&
+      (!category || recipe.category === category),
+  );
+}
+
 export function getAverageRating(ratings: number[]): number | null {
   if (ratings.length === 0) return null;
 
