@@ -1,6 +1,8 @@
 // @vitest-environment node
 
 import { randomUUID } from "node:crypto";
+import { spawnSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 import { afterAll, describe, expect, it, vi } from "vitest";
 
 vi.mock("server-only", () => ({}));
@@ -64,5 +66,42 @@ describe.skipIf(!hasDatabaseUrl)("Neon persistence integration", () => {
     await expect(addRating(recipeId, 6)).rejects.toThrow(
       "A rating must be a whole number from 1 to 5.",
     );
+  });
+
+  it("seeds the two distinct sample recipes without duplicates on repeat runs", async () => {
+    const seedScript = fileURLToPath(new URL("../db/seed.mjs", import.meta.url));
+    for (let run = 0; run < 2; run += 1) {
+      const result = spawnSync(process.execPath, [seedScript], {
+        encoding: "utf8",
+        env: process.env,
+      });
+      expect(result.status).toBe(0);
+    }
+
+    const seededRecipes = await getDb()`
+      SELECT id, cuisine, category, COUNT(*)::int AS count
+      FROM recipes
+      WHERE id IN (
+        'recipeshare-sample-persian-herb-salad',
+        'recipeshare-sample-italian-tiramisu'
+      )
+      GROUP BY id, cuisine, category
+      ORDER BY id
+    `;
+
+    expect(seededRecipes).toEqual([
+      {
+        id: "recipeshare-sample-italian-tiramisu",
+        cuisine: "Italian",
+        category: "Dessert",
+        count: 1,
+      },
+      {
+        id: "recipeshare-sample-persian-herb-salad",
+        cuisine: "Iranian",
+        category: "Salad",
+        count: 1,
+      },
+    ]);
   });
 });

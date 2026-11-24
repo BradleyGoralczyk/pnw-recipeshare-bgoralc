@@ -7,7 +7,8 @@
     "build": "npm run db:migrate && npm run db:test && next build",
     "start": "next start",
     "db:migrate": "node scripts/migrate.mjs",
-    "db:test": "vitest run test/database.integration.test.ts",
+    "db:seed": "node db/seed.mjs",
+    "db:test": "node scripts/db-test.mjs",
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit"
