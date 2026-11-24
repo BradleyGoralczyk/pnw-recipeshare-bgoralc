@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 
 import {
   createRecipe,
@@ -23,6 +23,16 @@ const fieldLabels: Record<RecipeFormField, string> = {
 };
 
 export function RecipeForm() {
+  const [draft, setDraft] = useState<Record<string, string>>({
+    authorName: "",
+    title: "",
+    cuisine: "",
+    category: "",
+    ingredients: "",
+    steps: "",
+    prepTimeMinutes: "",
+    imageUrl: "",
+  });
   const [state, formAction, isPending] = useActionState(
     createRecipe,
     initialState,
@@ -51,14 +61,25 @@ export function RecipeForm() {
     };
   }
 
+  function updateDraft(field: RecipeFormField, value: string) {
+    setDraft((currentDraft) => ({ ...currentDraft, [field]: value }));
+  }
+
   return (
-    <form action={formAction} className="recipe-form" noValidate>
+    <form
+      action={formAction}
+      className="recipe-form"
+      noValidate
+      onReset={(event) => event.preventDefault()}
+    >
       <div className="form-grid">
         <div className="form-field">
           <label htmlFor="authorName">{fieldLabels.authorName}</label>
           <input
             {...fieldProps("authorName")}
             autoComplete="name"
+            onChange={(event) => updateDraft("authorName", event.target.value)}
+            value={draft.authorName}
             maxLength={80}
             placeholder="Your name"
             type="text"
@@ -70,6 +91,8 @@ export function RecipeForm() {
           <label htmlFor="title">{fieldLabels.title}</label>
           <input
             {...fieldProps("title")}
+            onChange={(event) => updateDraft("title", event.target.value)}
+            value={draft.title}
             maxLength={120}
             placeholder="e.g. Golden Chickpea Curry"
             type="text"
@@ -79,7 +102,11 @@ export function RecipeForm() {
 
         <div className="form-field">
           <label htmlFor="cuisine">{fieldLabels.cuisine}</label>
-          <select {...fieldProps("cuisine")} defaultValue="">
+          <select
+            {...fieldProps("cuisine")}
+            onChange={(event) => updateDraft("cuisine", event.target.value)}
+            value={draft.cuisine}
+          >
             <option disabled value="">
               Choose a cuisine
             </option>
@@ -94,7 +121,11 @@ export function RecipeForm() {
 
         <div className="form-field">
           <label htmlFor="category">{fieldLabels.category}</label>
-          <select {...fieldProps("category")} defaultValue="">
+          <select
+            {...fieldProps("category")}
+            onChange={(event) => updateDraft("category", event.target.value)}
+            value={draft.category}
+          >
             <option disabled value="">
               Choose a category
             </option>
@@ -111,6 +142,8 @@ export function RecipeForm() {
           <label htmlFor="ingredients">{fieldLabels.ingredients}</label>
           <textarea
             {...fieldProps("ingredients")}
+            onChange={(event) => updateDraft("ingredients", event.target.value)}
+            value={draft.ingredients}
             placeholder={"One ingredient per line\n2 cups rice\n1 tablespoon olive oil"}
             rows={5}
           />
@@ -122,6 +155,8 @@ export function RecipeForm() {
           <label htmlFor="steps">{fieldLabels.steps}</label>
           <textarea
             {...fieldProps("steps")}
+            onChange={(event) => updateDraft("steps", event.target.value)}
+            value={draft.steps}
             placeholder={"One step per line\nRinse the rice.\nCook until tender."}
             rows={5}
           />
@@ -135,6 +170,8 @@ export function RecipeForm() {
           </label>
           <input
             {...fieldProps("prepTimeMinutes")}
+            onChange={(event) => updateDraft("prepTimeMinutes", event.target.value)}
+            value={draft.prepTimeMinutes}
             min={1}
             placeholder="30"
             step={1}
@@ -148,6 +185,8 @@ export function RecipeForm() {
           <input
             {...fieldProps("imageUrl")}
             autoCapitalize="none"
+            onChange={(event) => updateDraft("imageUrl", event.target.value)}
+            value={draft.imageUrl}
             placeholder="https://example.com/food-photo.jpg"
             type="url"
           />

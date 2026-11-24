@@ -56,6 +56,26 @@ describe("create recipe server action", () => {
     expect(revalidatePathMock).not.toHaveBeenCalled();
   });
 
+  it("returns the submitted values so the form can preserve a draft after validation fails", async () => {
+    const formData = makeValidRecipeForm();
+    formData.set("title", "  My unfinished recipe  ");
+    formData.set("imageUrl", "not a URL yet");
+
+    const state = await createRecipe({ errors: {} }, formData);
+
+    expect(state.errors.imageUrl).toBe("Enter a valid image URL.");
+    expect(state.values).toEqual({
+      authorName: "Sam Patel",
+      title: "  My unfinished recipe  ",
+      cuisine: "Indian",
+      category: "Breakfast",
+      ingredients: "1 cup oats\n2 cups milk\n1/4 teaspoon cardamom",
+      steps: "Bring milk to a simmer.\nStir in oats and cardamom.",
+      prepTimeMinutes: "15",
+      imageUrl: "not a URL yet",
+    });
+  });
+
   it("saves a valid recipe, refreshes the home page, and redirects there", async () => {
     const submission = createRecipe({ errors: {} }, makeValidRecipeForm());
 

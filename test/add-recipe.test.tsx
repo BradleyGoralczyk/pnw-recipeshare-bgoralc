@@ -97,9 +97,43 @@ describe("add recipe form", () => {
         prepTimeMinutes: "Enter a whole number of minutes greater than zero.",
         imageUrl: "Enter a valid image URL.",
       },
+      values: {
+        authorName: "Alex Rivera",
+        title: "Lemon Herb Rice",
+        cuisine: "American",
+        category: "Main Dish",
+        ingredients: "2 cups rice\n1 lemon",
+        steps: "Rinse the rice.",
+        prepTimeMinutes: "25",
+        imageUrl: "not a valid URL",
+      },
     });
 
     render(<RecipeForm />);
+    fireEvent.change(screen.getByLabelText("Author name"), {
+      target: { value: "Alex Rivera" },
+    });
+    fireEvent.change(screen.getByLabelText("Recipe title"), {
+      target: { value: "Lemon Herb Rice" },
+    });
+    fireEvent.change(screen.getByLabelText("Cuisine"), {
+      target: { value: "American" },
+    });
+    fireEvent.change(screen.getByLabelText("Category"), {
+      target: { value: "Main Dish" },
+    });
+    fireEvent.change(screen.getByLabelText("Ingredients"), {
+      target: { value: "2 cups rice\n1 lemon" },
+    });
+    fireEvent.change(screen.getByLabelText("Preparation steps"), {
+      target: { value: "Rinse the rice." },
+    });
+    fireEvent.change(screen.getByLabelText("Prep time in minutes"), {
+      target: { value: "25" },
+    });
+    fireEvent.change(screen.getByLabelText("Image URL"), {
+      target: { value: "not a valid URL" },
+    });
     const form = screen
       .getByRole("button", { name: "Share recipe" })
       .closest("form");
@@ -117,6 +151,18 @@ describe("add recipe form", () => {
       "aria-invalid",
       "true",
     );
+    expect(screen.getByLabelText("Author name")).toHaveValue("Alex Rivera");
+    expect(screen.getByLabelText("Recipe title")).toHaveValue("Lemon Herb Rice");
+    expect(screen.getByLabelText("Cuisine")).toHaveValue("American");
+    expect(screen.getByLabelText("Category")).toHaveValue("Main Dish");
+    expect(screen.getByLabelText("Ingredients")).toHaveValue(
+      "2 cups rice\n1 lemon",
+    );
+    expect(screen.getByLabelText("Preparation steps")).toHaveValue(
+      "Rinse the rice.",
+    );
+    expect(screen.getByLabelText("Prep time in minutes")).toHaveValue(25);
+    expect(screen.getByLabelText("Image URL")).toHaveValue("not a valid URL");
   });
 
   it("saves a complete recipe and shows its card on the home page", () => {

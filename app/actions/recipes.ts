@@ -8,7 +8,28 @@ import type { RecipeFormErrors } from "@/lib/recipe-form";
 
 export type RecipeFormState = {
   errors: RecipeFormErrors;
+  values?: Record<string, string>;
 };
+
+const formFields = [
+  "authorName",
+  "title",
+  "cuisine",
+  "category",
+  "ingredients",
+  "steps",
+  "prepTimeMinutes",
+  "imageUrl",
+] as const;
+
+function readFormValues(formData: FormData): Record<string, string> {
+  return Object.fromEntries(
+    formFields.map((field) => {
+      const value = formData.get(field);
+      return [field, typeof value === "string" ? value : ""];
+    }),
+  );
+}
 
 export async function createRecipe(
   _previousState: RecipeFormState,
@@ -17,7 +38,7 @@ export async function createRecipe(
   const result = submitRecipeForm(formData);
 
   if (!result.recipe) {
-    return { errors: result.errors };
+    return { errors: result.errors, values: readFormValues(formData) };
   }
 
   revalidatePath("/");
