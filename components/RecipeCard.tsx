@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { isRecipeImageOptimizable } from "@/lib/image-url";
 import { getAverageRating, type Recipe } from "@/lib/recipes";
 
 export function RecipeCard({ recipe }: { recipe: Recipe }) {
@@ -22,6 +23,7 @@ export function RecipeCard({ recipe }: { recipe: Recipe }) {
             alt={recipe.imageAlt}
             className="recipe-photo"
             height={800}
+            unoptimized={!isRecipeImageOptimizable(recipe.imageUrl)}
             src={recipe.imageUrl}
             sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
             width={1200}

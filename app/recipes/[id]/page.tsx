@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { isRecipeImageOptimizable } from "@/lib/image-url";
 import { getAverageRating, getRecipeById } from "@/lib/recipes";
 
 type RecipeDetailsPageProps = {
@@ -98,6 +99,7 @@ export default async function RecipeDetailsPage({
             alt={recipe.imageAlt}
             className="recipe-detail-photo"
             height={1200}
+            unoptimized={!isRecipeImageOptimizable(recipe.imageUrl)}
             src={recipe.imageUrl}
             sizes="(max-width: 800px) 100vw, 50vw"
             width={1200}

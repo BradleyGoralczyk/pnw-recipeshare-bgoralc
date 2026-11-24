@@ -1,0 +1,146 @@
+import {
+  cleanup,
+  fireEvent,
+  render,
+  screen,
+  within,
+} from "@testing-library/react";
+import { afterEach, describe, expect, it, vi } from "vitest";
+
+import { RecipeForm } from "@/components/RecipeForm";
+import HomePage from "@/app/page";
+import { CATEGORIES, CUISINES, recipes } from "@/lib/recipes";
+import { submitRecipeForm } from "@/lib/recipe-submission";
+import { createRecipe } from "@/app/actions/recipes";
+
+vi.mock("@/app/actions/recipes", () => ({
+  createRecipe: vi.fn(async () => ({ errors: {} })),
+}));
+
+let addedRecipeId: string | undefined;
+
+afterEach(() => {
+  cleanup();
+  if (addedRecipeId) {
+    const index = recipes.findIndex((recipe) => recipe.id === addedRecipeId);
+    if (index !== -1) recipes.splice(index, 1);
+    addedRecipeId = undefined;
+  }
+});
+
+function makeValidRecipeForm(): FormData {
+  const formData = new FormData();
+  formData.set("authorName", "Alex Rivera");
+  formData.set("title", "Lemon Herb Rice");
+  formData.set("cuisine", "American");
+  formData.set("category", "Main Dish");
+  formData.set("ingredients", "2 cups rice\n1 lemon\nFresh parsley");
+  formData.set("steps", "Rinse the rice.\nCook until tender.\nAdd lemon and herbs.");
+  formData.set("prepTimeMinutes", "25");
+  formData.set("imageUrl", "https://example.com/lemon-rice.jpg");
+  return formData;
+}
+
+describe("add recipe form", () => {
+  it("uses the fixed cuisine and category choices and includes every required field", () => {
+    render(<RecipeForm />);
+
+    expect(screen.getByLabelText("Author name")).toBeRequired();
+    expect(screen.getByLabelText("Recipe title")).toBeRequired();
+    expect(screen.getByLabelText("Ingredients")).toBeRequired();
+    expect(screen.getByLabelText("Preparation steps")).toBeRequired();
+    expect(screen.getByLabelText("Prep time in minutes")).toBeRequired();
+    expect(screen.getByLabelText("Image URL")).toBeRequired();
+
+    const cuisineOptions = within(
+      screen.getByRole("combobox", { name: "Cuisine" }),
+    ).getAllByRole("option");
+    const categoryOptions = within(
+      screen.getByRole("combobox", { name: "Category" }),
+    ).getAllByRole("option");
+
+    expect(cuisineOptions.slice(1).map((option) => option.textContent)).toEqual(
+      [...CUISINES],
+    );
+    expect(
+      categoryOptions.slice(1).map((option) => option.textContent),
+    ).toEqual([...CATEGORIES]);
+  });
+
+  it("reports every missing field and does not save an incomplete recipe", () => {
+    const recipesBefore = [...recipes];
+    const result = submitRecipeForm(new FormData());
+
+    expect(result.recipe).toBeNull();
+    expect(result.errors).toMatchObject({
+      authorName: expect.any(String),
+      title: expect.any(String),
+      cuisine: expect.any(String),
+      category: expect.any(String),
+      ingredients: expect.any(String),
+      steps: expect.any(String),
+      prepTimeMinutes: expect.any(String),
+      imageUrl: expect.any(String),
+    });
+    expect(recipes).toEqual(recipesBefore);
+  });
+
+  it("shows field-specific validation errors after a form submission", async () => {
+    vi.mocked(createRecipe).mockResolvedValueOnce({
+      errors: {
+        authorName: "Author name is required.",
+        title: "Recipe title is required.",
+        cuisine: "Choose a cuisine.",
+        category: "Choose a category.",
+        ingredients: "Add at least one ingredient.",
+        steps: "Add at least one preparation step.",
+        prepTimeMinutes: "Enter a whole number of minutes greater than zero.",
+        imageUrl: "Enter a valid image URL.",
+      },
+    });
+
+    render(<RecipeForm />);
+    const form = screen
+      .getByRole("button", { name: "Share recipe" })
+      .closest("form");
+    if (!form) throw new Error("The recipe form should be present");
+    fireEvent.submit(form);
+
+    expect(await screen.findByText("Author name is required.")).toBeInTheDocument();
+    expect(screen.getByText("Recipe title is required.")).toBeInTheDocument();
+    expect(screen.getByText("Choose a cuisine.")).toBeInTheDocument();
+    expect(screen.getByText("Choose a category.")).toBeInTheDocument();
+    expect(screen.getByText("Add at least one ingredient.")).toBeInTheDocument();
+    expect(screen.getByText("Add at least one preparation step.")).toBeInTheDocument();
+    expect(screen.getByText("Enter a valid image URL.")).toBeInTheDocument();
+    expect(screen.getByLabelText("Recipe title")).toHaveAttribute(
+      "aria-invalid",
+      "true",
+    );
+  });
+
+  it("saves a complete recipe and shows its card on the home page", () => {
+    const result = submitRecipeForm(makeValidRecipeForm());
+
+    expect(result.errors).toEqual({});
+    expect(result.recipe).not.toBeNull();
+    if (!result.recipe) throw new Error("Expected the valid recipe to be saved");
+
+    addedRecipeId = result.recipe.id;
+    render(<HomePage />);
+
+    const recipeCard = screen.getByRole("article", {
+      name: "Lemon Herb Rice",
+    });
+    expect(within(recipeCard).getByText("American")).toBeInTheDocument();
+    expect(within(recipeCard).getByText("Main Dish")).toBeInTheDocument();
+    const recipePhoto = within(recipeCard).getByRole("img", {
+      name: "Photo of Lemon Herb Rice",
+    });
+    expect(recipePhoto).toHaveAttribute(
+      "src",
+      "https://example.com/lemon-rice.jpg",
+    );
+    expect(within(recipeCard).getByText("Not rated yet")).toBeInTheDocument();
+  });
+});

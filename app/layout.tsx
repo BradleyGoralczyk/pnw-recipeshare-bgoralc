@@ -20,7 +20,12 @@ export default function RootLayout({
           <Link className="brand" href="/">
             RecipeShare
           </Link>
-          <span className="header-note">A world of recipes</span>
+          <nav aria-label="Main navigation" className="header-actions">
+            <span className="header-note">A world of recipes</span>
+            <Link className="header-cta" href="/recipes/new">
+              Share a recipe
+            </Link>
+          </nav>
         </header>
         {children}
       </body>

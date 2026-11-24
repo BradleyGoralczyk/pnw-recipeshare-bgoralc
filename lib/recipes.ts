@@ -50,6 +50,10 @@ export function getRecipeById(id: string): Recipe | undefined {
   return recipes.find((recipe) => recipe.id === id);
 }
 
+export function addRecipe(recipe: Recipe): void {
+  recipes.unshift(recipe);
+}
+
 // Starter recipes use Unsplash photos; all images are food-only and served from
 // Unsplash's image CDN. Recipe and rating persistence will be added with M6.
 export const recipes: Recipe[] = [

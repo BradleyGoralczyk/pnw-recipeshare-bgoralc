@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { RecipeCard } from "@/components/RecipeCard";
 import { recipes } from "@/lib/recipes";
 
@@ -11,6 +13,9 @@ export default function HomePage() {
           <p className="intro-copy">
             Find something new to cook, shared from kitchens around the world.
           </p>
+          <Link className="hero-link" href="/recipes/new">
+            Share a recipe <span aria-hidden="true">→</span>
+          </Link>
         </div>
         <div className="welcome-stamp" aria-hidden="true">
           <span>Recipes</span>
