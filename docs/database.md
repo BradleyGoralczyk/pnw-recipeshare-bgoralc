@@ -11,7 +11,7 @@ Vercel's Neon integration marks its connection values as secrets, so `vercel env
 ## Schema and checks
 
 - `npm run db:migrate` applies ordered SQL files in `db/migrations` and records them in `schema_migrations`. Migrations are repeatable and run automatically before a Vercel build.
-- `npm run db:seed` inserts two starter recipes: an Iranian salad and an Italian dessert. Their stable IDs and `ON CONFLICT DO NOTHING` make the command safe to run more than once. It loads local development env files and can also use the environment variables provided by Vercel. Run it once against the database used by the deployed app to make the samples visible there.
+- `npm run db:seed` inserts two starter recipes plus 78 catalog recipes covering each cuisine/category pair. Stable IDs make the command safe to run more than once; catalog rows are refreshed from the seed definition while the two starter recipes remain untouched. It loads local development env files and can also use the environment variables provided by Vercel. Run it against the database used by the deployed app to make the catalog visible there.
 - `npm run db:test` loads local env files and runs the database integration tests. They create and remove a temporary recipe and rating, verify the seed is repeatable, and skip when no database URL is configured.
 - `npm run build` runs migrations, the database integration tests, and the Next.js production build. A local build without a database URL skips database-only steps; a Vercel build fails if its database URL is missing.
 
