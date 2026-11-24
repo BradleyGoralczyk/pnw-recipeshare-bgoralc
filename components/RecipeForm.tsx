@@ -7,7 +7,7 @@ import {
   type RecipeFormState,
 } from "@/app/actions/recipes";
 import type { RecipeFormField } from "@/lib/recipe-form";
-import { CATEGORIES, CUISINES } from "@/lib/recipes";
+import { CATEGORIES, CUISINES } from "@/lib/recipe-model";
 
 const initialState: RecipeFormState = { errors: {} };
 

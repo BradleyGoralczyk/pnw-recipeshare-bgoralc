@@ -1,9 +1,13 @@
 import Link from "next/link";
 
 import { RecipeFilters } from "@/components/RecipeFilters";
-import { recipes } from "@/lib/recipes";
+import { getRecipes } from "@/lib/recipes";
 
-export default function HomePage() {
+export const dynamic = "force-dynamic";
+
+export default async function HomePage() {
+  const recipes = await getRecipes();
+
   return (
     <main className="page-shell">
       <section className="welcome-panel" aria-labelledby="welcome-heading">

@@ -1,6 +1,7 @@
 import { randomUUID } from "node:crypto";
 
-import { addRecipe, type Recipe } from "@/lib/recipes";
+import { addRecipe } from "@/lib/recipes";
+import type { Recipe } from "@/lib/recipe-model";
 import { validateRecipeForm, type RecipeFormErrors } from "@/lib/recipe-form";
 
 export type RecipeSubmissionResult = {
@@ -8,7 +9,9 @@ export type RecipeSubmissionResult = {
   errors: RecipeFormErrors;
 };
 
-export function submitRecipeForm(formData: FormData): RecipeSubmissionResult {
+export async function submitRecipeForm(
+  formData: FormData,
+): Promise<RecipeSubmissionResult> {
   const validation = validateRecipeForm(formData);
 
   if (!validation.data) {
@@ -22,7 +25,7 @@ export function submitRecipeForm(formData: FormData): RecipeSubmissionResult {
     ratings: [],
   };
 
-  addRecipe(recipe);
+  await addRecipe(recipe);
 
   return { recipe, errors: {} };
 }

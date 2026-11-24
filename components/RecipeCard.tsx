@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { isRecipeImageOptimizable } from "@/lib/image-url";
-import { getAverageRating, type Recipe } from "@/lib/recipes";
+import { getAverageRating, type Recipe } from "@/lib/recipe-model";
 
 export function RecipeCard({ recipe }: { recipe: Recipe }) {
   const averageRating = getAverageRating(recipe.ratings);

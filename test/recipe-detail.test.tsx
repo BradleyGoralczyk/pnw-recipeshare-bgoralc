@@ -1,12 +1,20 @@
 import { render, screen, within } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import RecipeDetailsPage from "@/app/recipes/[id]/page";
-import { getRecipeById, recipes } from "@/lib/recipes";
+import { getRecipeById } from "@/lib/recipes";
+import { recipeFixtures } from "@/test/fixtures/recipes";
+
+vi.mock("@/lib/recipes", () => ({ getRecipeById: vi.fn() }));
+
+beforeEach(() => {
+  vi.mocked(getRecipeById).mockReset();
+});
 
 describe("recipe detail page", () => {
   it("shows all recipe fields and the author for a known recipe", async () => {
-    const recipe = recipes[0];
+    const recipe = recipeFixtures[0];
+    vi.mocked(getRecipeById).mockResolvedValue(recipe);
     const page = await RecipeDetailsPage({
       params: Promise.resolve({ id: recipe.id }),
     });
@@ -40,7 +48,8 @@ describe("recipe detail page", () => {
     }
   });
 
-  it("returns no recipe for an unknown ID so the route can show not found", () => {
-    expect(getRecipeById("not-a-real-recipe")).toBeUndefined();
+  it("returns no recipe for an unknown ID so the route can show not found", async () => {
+    vi.mocked(getRecipeById).mockResolvedValue(undefined);
+    await expect(getRecipeById("not-a-real-recipe")).resolves.toBeUndefined();
   });
 });

@@ -4,7 +4,7 @@ import {
   type Category,
   type Cuisine,
   type Recipe,
-} from "@/lib/recipes";
+} from "@/lib/recipe-model";
 
 export type RecipeFormField =
   | "authorName"

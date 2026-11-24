@@ -35,7 +35,7 @@ export async function createRecipe(
   _previousState: RecipeFormState,
   formData: FormData,
 ): Promise<RecipeFormState> {
-  const result = submitRecipeForm(formData);
+  const result = await submitRecipeForm(formData);
 
   if (!result.recipe) {
     return { errors: result.errors, values: readFormValues(formData) };

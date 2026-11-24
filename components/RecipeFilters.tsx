@@ -10,7 +10,7 @@ import {
   type Category,
   type Cuisine,
   type Recipe,
-} from "@/lib/recipes";
+} from "@/lib/recipe-model";
 
 export function RecipeFilters({ recipes }: { recipes: Recipe[] }) {
   const [cuisine, setCuisine] = useState<Cuisine | "">("");

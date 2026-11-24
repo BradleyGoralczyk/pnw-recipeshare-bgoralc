@@ -1,0 +1,43 @@
+import type { Recipe } from "@/lib/recipe-model";
+
+export const recipeFixtures: Recipe[] = [
+  {
+    id: "chickpea-curry",
+    authorName: "Nila Rahimi",
+    title: "Golden Chickpea Curry",
+    cuisine: "Indian",
+    category: "Main Dish",
+    ingredients: ["2 cans chickpeas", "1 onion", "1 can coconut milk"],
+    steps: ["Soften the onion.", "Add chickpeas and coconut milk.", "Simmer and serve."],
+    prepTimeMinutes: 30,
+    imageUrl: "https://example.com/chickpea-curry.jpg",
+    imageAlt: "A colorful bowl of curry with fresh greens",
+    ratings: [5, 4, 5, 5, 4, 5],
+  },
+  {
+    id: "steamed-dumplings",
+    authorName: "Mei Chen",
+    title: "Ginger Vegetable Dumplings",
+    cuisine: "Chinese",
+    category: "Snack",
+    ingredients: ["24 dumpling wrappers", "2 cups cabbage", "1 tablespoon ginger"],
+    steps: ["Mix the filling.", "Fill and seal wrappers.", "Steam and serve."],
+    prepTimeMinutes: 35,
+    imageUrl: "https://example.com/vegetable-dumplings.jpg",
+    imageAlt: "Steamed dumplings arranged on a plate",
+    ratings: [4, 5, 5, 4, 5],
+  },
+  {
+    id: "shoyu-ramen",
+    authorName: "Hana Mori",
+    title: "Weeknight Shoyu Ramen",
+    cuisine: "Japanese",
+    category: "Main Dish",
+    ingredients: ["2 portions ramen noodles", "4 cups vegetable broth", "3 tablespoons soy sauce"],
+    steps: ["Warm broth and soy sauce.", "Cook the noodles.", "Serve with toppings."],
+    prepTimeMinutes: 25,
+    imageUrl: "https://example.com/shoyu-ramen.jpg",
+    imageAlt: "A steaming bowl of ramen topped with noodles and garnish",
+    ratings: [5, 5, 4, 5, 4, 5, 5],
+  },
+];

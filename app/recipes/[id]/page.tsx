@@ -3,7 +3,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { isRecipeImageOptimizable } from "@/lib/image-url";
-import { getAverageRating, getRecipeById } from "@/lib/recipes";
+import { getAverageRating } from "@/lib/recipe-model";
+import { getRecipeById } from "@/lib/recipes";
+
+export const dynamic = "force-dynamic";
 
 type RecipeDetailsPageProps = {
   params: Promise<{ id: string }>;
@@ -13,7 +16,7 @@ export default async function RecipeDetailsPage({
   params,
 }: RecipeDetailsPageProps) {
   const { id } = await params;
-  const recipe = getRecipeById(id);
+  const recipe = await getRecipeById(id);
 
   if (!recipe) {
     notFound();

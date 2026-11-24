@@ -1,19 +1,27 @@
 import { render, screen, within } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import HomePage from "../app/page";
-import { getAverageRating, recipes } from "@/lib/recipes";
+import { getRecipes } from "@/lib/recipes";
+import { getAverageRating } from "@/lib/recipe-model";
+import { recipeFixtures } from "@/test/fixtures/recipes";
+
+vi.mock("@/lib/recipes", () => ({ getRecipes: vi.fn() }));
+
+beforeEach(() => {
+  vi.mocked(getRecipes).mockResolvedValue(recipeFixtures);
+});
 
 describe("home page recipe browsing", () => {
-  it("shows recipe cards with a photo, title, cuisine, category, and average rating", () => {
-    render(<HomePage />);
+  it("shows recipe cards with a photo, title, cuisine, category, and average rating", async () => {
+    render(await HomePage());
 
     expect(
       screen.getByRole("heading", { name: "Good food brings us together." }),
     ).toBeInTheDocument();
-    expect(screen.getAllByRole("article")).toHaveLength(recipes.length);
+    expect(screen.getAllByRole("article")).toHaveLength(recipeFixtures.length);
 
-    for (const recipe of recipes) {
+    for (const recipe of recipeFixtures) {
       const card = screen.getByRole("article", { name: recipe.title });
       const averageRating = getAverageRating(recipe.ratings);
 

@@ -9,23 +9,26 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { RecipeForm } from "@/components/RecipeForm";
 import HomePage from "@/app/page";
-import { CATEGORIES, CUISINES, recipes } from "@/lib/recipes";
+import { addRecipe, getRecipes } from "@/lib/recipes";
+import { CATEGORIES, CUISINES } from "@/lib/recipe-model";
 import { submitRecipeForm } from "@/lib/recipe-submission";
 import { createRecipe } from "@/app/actions/recipes";
+import { recipeFixtures } from "@/test/fixtures/recipes";
 
 vi.mock("@/app/actions/recipes", () => ({
   createRecipe: vi.fn(async () => ({ errors: {} })),
 }));
-
-let addedRecipeId: string | undefined;
+vi.mock("@/lib/recipes", () => ({
+  addRecipe: vi.fn(async () => undefined),
+  getRecipes: vi.fn(async () => recipeFixtures),
+}));
 
 afterEach(() => {
   cleanup();
-  if (addedRecipeId) {
-    const index = recipes.findIndex((recipe) => recipe.id === addedRecipeId);
-    if (index !== -1) recipes.splice(index, 1);
-    addedRecipeId = undefined;
-  }
+  vi.mocked(addRecipe).mockReset();
+  vi.mocked(addRecipe).mockResolvedValue(undefined);
+  vi.mocked(getRecipes).mockReset();
+  vi.mocked(getRecipes).mockResolvedValue(recipeFixtures);
 });
 
 function makeValidRecipeForm(): FormData {
@@ -67,9 +70,8 @@ describe("add recipe form", () => {
     ).toEqual([...CATEGORIES]);
   });
 
-  it("reports every missing field and does not save an incomplete recipe", () => {
-    const recipesBefore = [...recipes];
-    const result = submitRecipeForm(new FormData());
+  it("reports every missing field and does not save an incomplete recipe", async () => {
+    const result = await submitRecipeForm(new FormData());
 
     expect(result.recipe).toBeNull();
     expect(result.errors).toMatchObject({
@@ -82,7 +84,7 @@ describe("add recipe form", () => {
       prepTimeMinutes: expect.any(String),
       imageUrl: expect.any(String),
     });
-    expect(recipes).toEqual(recipesBefore);
+    expect(addRecipe).not.toHaveBeenCalled();
   });
 
   it("shows field-specific validation errors after a form submission", async () => {
@@ -165,15 +167,16 @@ describe("add recipe form", () => {
     expect(screen.getByLabelText("Image URL")).toHaveValue("not a valid URL");
   });
 
-  it("saves a complete recipe and shows its card on the home page", () => {
-    const result = submitRecipeForm(makeValidRecipeForm());
+  it("saves a complete recipe and shows its card on the home page", async () => {
+    const result = await submitRecipeForm(makeValidRecipeForm());
 
     expect(result.errors).toEqual({});
     expect(result.recipe).not.toBeNull();
     if (!result.recipe) throw new Error("Expected the valid recipe to be saved");
 
-    addedRecipeId = result.recipe.id;
-    render(<HomePage />);
+    expect(addRecipe).toHaveBeenCalledWith(result.recipe);
+    vi.mocked(getRecipes).mockResolvedValue([result.recipe, ...recipeFixtures]);
+    render(await HomePage());
 
     const recipeCard = screen.getByRole("article", {
       name: "Lemon Herb Rice",

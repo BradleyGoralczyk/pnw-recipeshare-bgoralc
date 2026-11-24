@@ -1,27 +1,21 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-const { revalidatePathMock, redirectMock } = vi.hoisted(() => ({
+const { revalidatePathMock, redirectMock, addRecipeMock } = vi.hoisted(() => ({
   revalidatePathMock: vi.fn(),
   redirectMock: vi.fn((path: string) => {
     throw new Error(`NEXT_REDIRECT:${path}`);
   }),
+  addRecipeMock: vi.fn(async () => undefined),
 }));
 
 vi.mock("next/cache", () => ({ revalidatePath: revalidatePathMock }));
 vi.mock("next/navigation", () => ({ redirect: redirectMock }));
+vi.mock("@/lib/recipes", () => ({ addRecipe: addRecipeMock }));
 
 import { createRecipe } from "@/app/actions/recipes";
-import { recipes } from "@/lib/recipes";
-
-let createdRecipeId: string | undefined;
 
 afterEach(() => {
   vi.clearAllMocks();
-  if (createdRecipeId) {
-    const index = recipes.findIndex((recipe) => recipe.id === createdRecipeId);
-    if (index !== -1) recipes.splice(index, 1);
-    createdRecipeId = undefined;
-  }
 });
 
 function makeValidRecipeForm(): FormData {
@@ -39,7 +33,6 @@ function makeValidRecipeForm(): FormData {
 
 describe("create recipe server action", () => {
   it("returns field errors without saving or revalidating when required values are missing", async () => {
-    const recipeCountBefore = recipes.length;
     const state = await createRecipe({ errors: {} }, new FormData());
 
     expect(state.errors.authorName).toBe("Author name is required.");
@@ -52,7 +45,7 @@ describe("create recipe server action", () => {
       "Enter a whole number of minutes greater than zero.",
     );
     expect(state.errors.imageUrl).toBe("Enter a valid image URL.");
-    expect(recipes).toHaveLength(recipeCountBefore);
+    expect(addRecipeMock).not.toHaveBeenCalled();
     expect(revalidatePathMock).not.toHaveBeenCalled();
   });
 
@@ -83,12 +76,12 @@ describe("create recipe server action", () => {
 
     expect(revalidatePathMock).toHaveBeenCalledWith("/");
     expect(redirectMock).toHaveBeenCalledWith("/");
-    const recipe = recipes.find(
-      (candidate) => candidate.title === "Cardamom Oat Porridge",
+    expect(addRecipeMock).toHaveBeenCalledWith(
+      expect.objectContaining({
+        title: "Cardamom Oat Porridge",
+        authorName: "Sam Patel",
+        ingredients: expect.arrayContaining(["1 cup oats"]),
+      }),
     );
-    expect(recipe).toBeDefined();
-    expect(recipe?.authorName).toBe("Sam Patel");
-    expect(recipe?.ingredients).toContain("1 cup oats");
-    if (recipe) createdRecipeId = recipe.id;
   });
 });

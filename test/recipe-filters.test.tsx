@@ -2,12 +2,13 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
 import { RecipeFilters } from "@/components/RecipeFilters";
-import { filterRecipes, recipes } from "@/lib/recipes";
+import { filterRecipes } from "@/lib/recipe-model";
+import { recipeFixtures } from "@/test/fixtures/recipes";
 
 const testRecipes = [
-  { ...recipes[0], id: "iranian-main", cuisine: "Iranian" as const, category: "Main Dish" as const },
-  { ...recipes[1], id: "iranian-snack", cuisine: "Iranian" as const, category: "Snack" as const },
-  { ...recipes[2], id: "chinese-main", cuisine: "Chinese" as const, category: "Main Dish" as const },
+  { ...recipeFixtures[0], id: "iranian-main", cuisine: "Iranian" as const, category: "Main Dish" as const },
+  { ...recipeFixtures[1], id: "iranian-snack", cuisine: "Iranian" as const, category: "Snack" as const },
+  { ...recipeFixtures[2], id: "chinese-main", cuisine: "Chinese" as const, category: "Main Dish" as const },
 ];
 
 describe("recipe filters", () => {
