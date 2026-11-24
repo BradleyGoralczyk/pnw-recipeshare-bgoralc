@@ -27,7 +27,10 @@ function makeValidRecipeForm(): FormData {
   formData.set("ingredients", "1 cup oats\n2 cups milk\n1/4 teaspoon cardamom");
   formData.set("steps", "Bring milk to a simmer.\nStir in oats and cardamom.");
   formData.set("prepTimeMinutes", "15");
-  formData.set("imageUrl", "https://example.com/cardamom-oats.jpg");
+  formData.set(
+    "imageUrl",
+    "https://sample.public.blob.vercel-storage.com/recipe-images/cardamom-oats.jpg",
+  );
   formData.set("videoUrl", "https://www.youtube.com/watch?v=example");
   formData.append("dietaryTags", "Vegan");
   return formData;

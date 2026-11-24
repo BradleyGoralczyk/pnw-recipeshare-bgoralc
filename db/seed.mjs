@@ -27,7 +27,7 @@ export const sampleRecipes = [
     ],
     prepTimeMinutes: 15,
     imageUrl:
-      "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=1200&q=85",
+      "https://b5kiqjzugnm5hspn.public.blob.vercel-storage.com/recipe-images/migrated/recipeshare-sample-persian-herb-salad.jpg",
     imageAlt: "A colorful bowl of fresh vegetables and herbs",
   },
   {
@@ -52,7 +52,7 @@ export const sampleRecipes = [
     ],
     prepTimeMinutes: 30,
     imageUrl:
-      "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?auto=format&fit=crop&w=1200&q=85",
+      "https://b5kiqjzugnm5hspn.public.blob.vercel-storage.com/recipe-images/migrated/recipeshare-sample-italian-tiramisu.jpg",
     imageAlt: "A layered tiramisu dessert dusted with cocoa",
   },
 ];

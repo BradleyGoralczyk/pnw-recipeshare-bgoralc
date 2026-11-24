@@ -30,6 +30,7 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000). The seed command adds an Iranian salad and an Italian dessert and is safe to repeat.
+For this repository's existing sample data, `npm run db:migrate:images` copies the two sample photos to the connected public Blob store and updates their Neon URLs. It is safe to rerun. Existing images are grandfathered regardless of size; the 5 MB limit applies only to new uploads.
 
 ## Tests and build
 
@@ -81,7 +82,7 @@ Repository: [BradleyGoralczyk/pnw-recipeshare-bgoralc](https://github.com/Bradle
 
 ### Engineering requirements
 
-Visitor uploads are intentionally open and stored as public images. Anyone can request an upload token and consume the Blob allowance; upload count is not capped. Only JPEG, PNG, and WebP files up to 5 MB are allowed. Do not use this configuration for sensitive photos.
+Visitor uploads are intentionally open and stored as public images. Anyone can request an upload token and consume the Blob allowance; upload count is not capped. New uploads accept JPEG, PNG, and WebP files up to 5 MB, and the server accepts only URLs from the recipe upload namespace. Existing images are grandfathered regardless of size. Do not use this configuration for sensitive photos.
 
 - **E1 - Done:** public GitHub repository.
 - **E2 - Done:** agent instructions, product spec, and build plan are in the repository.

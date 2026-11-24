@@ -112,12 +112,14 @@ export function validateRecipeForm(formData: FormData): RecipeFormValidation {
       errors.imageUrl = "Upload a valid food photo.";
     }
   }
-  if (
-    parsedImageUrl &&
-    parsedImageUrl.protocol !== "https:" &&
-    parsedImageUrl.protocol !== "http:"
-  ) {
-    errors.imageUrl = "Recipe photo URL must start with http:// or https://.";
+  if (parsedImageUrl) {
+    const isUploadedRecipePhoto =
+      parsedImageUrl.protocol === "https:" &&
+      parsedImageUrl.hostname.endsWith(".public.blob.vercel-storage.com") &&
+      parsedImageUrl.pathname.startsWith("/recipe-images/");
+    if (!isUploadedRecipePhoto) {
+      errors.imageUrl = "Use a photo uploaded with the photo picker.";
+    }
   }
 
   let parsedVideoUrl: URL | null = null;

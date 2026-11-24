@@ -52,7 +52,10 @@ function makeValidRecipeForm(): FormData {
   formData.set("ingredients", "2 cups rice\n1 lemon\nFresh parsley");
   formData.set("steps", "Rinse the rice.\nCook until tender.\nAdd lemon and herbs.");
   formData.set("prepTimeMinutes", "25");
-  formData.set("imageUrl", "https://example.com/lemon-rice.jpg");
+  formData.set(
+    "imageUrl",
+    "https://sample.public.blob.vercel-storage.com/recipe-images/lemon-rice.jpg",
+  );
   formData.set("videoUrl", "https://www.youtube.com/watch?v=example");
   formData.append("dietaryTags", "Vegetarian");
   return formData;
@@ -154,6 +157,19 @@ describe("add recipe form", () => {
       prepTimeMinutes: expect.any(String),
       imageUrl: expect.any(String),
     });
+    expect(addRecipe).not.toHaveBeenCalled();
+  });
+
+  it("rejects a linked image URL submitted directly to the server", async () => {
+    const formData = makeValidRecipeForm();
+    formData.set("imageUrl", "https://example.com/linked-photo.jpg");
+
+    const result = await submitRecipeForm(formData);
+
+    expect(result.recipe).toBeNull();
+    expect(result.errors.imageUrl).toBe(
+      "Use a photo uploaded with the photo picker.",
+    );
     expect(addRecipe).not.toHaveBeenCalled();
   });
 
@@ -272,7 +288,7 @@ describe("add recipe form", () => {
     });
     expect(recipePhoto).toHaveAttribute(
       "src",
-      "https://example.com/lemon-rice.jpg",
+      "https://sample.public.blob.vercel-storage.com/recipe-images/lemon-rice.jpg",
     );
     expect(within(recipeCard).getByText("Not rated yet")).toBeInTheDocument();
   });

@@ -31,7 +31,7 @@ describe.skipIf(!hasDatabaseUrl)("Neon persistence integration", () => {
       ingredients: ["1 cup rice", "1 tablespoon oil"],
       steps: ["Rinse the rice.", "Cook until tender."],
       prepTimeMinutes: 20,
-      imageUrl: "https://example.com/neon-persistence.jpg",
+      imageUrl: "https://sample.public.blob.vercel-storage.com/recipe-images/neon-persistence.jpg",
       imageAlt: "A bowl of rice",
       ratings: [],
       videoUrl: "https://www.youtube.com/watch?v=example",
@@ -94,13 +94,13 @@ describe.skipIf(!hasDatabaseUrl)("Neon persistence integration", () => {
     }
 
     const seededRecipes = await getDb()`
-      SELECT id, cuisine, category, COUNT(*)::int AS count
+      SELECT id, cuisine, category, image_url AS "imageUrl", COUNT(*)::int AS count
       FROM recipes
       WHERE id IN (
         'recipeshare-sample-persian-herb-salad',
         'recipeshare-sample-italian-tiramisu'
       )
-      GROUP BY id, cuisine, category
+      GROUP BY id, cuisine, category, image_url
       ORDER BY id
     `;
 
@@ -109,12 +109,16 @@ describe.skipIf(!hasDatabaseUrl)("Neon persistence integration", () => {
         id: "recipeshare-sample-italian-tiramisu",
         cuisine: "Italian",
         category: "Dessert",
+        imageUrl:
+          "https://b5kiqjzugnm5hspn.public.blob.vercel-storage.com/recipe-images/migrated/recipeshare-sample-italian-tiramisu.jpg",
         count: 1,
       },
       {
         id: "recipeshare-sample-persian-herb-salad",
         cuisine: "Iranian",
         category: "Salad",
+        imageUrl:
+          "https://b5kiqjzugnm5hspn.public.blob.vercel-storage.com/recipe-images/migrated/recipeshare-sample-persian-herb-salad.jpg",
         count: 1,
       },
     ]);
