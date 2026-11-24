@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { isRecipeImageOptimizable } from "@/lib/image-url";
 import { getAverageRating } from "@/lib/recipe-model";
 import { getRecipeById } from "@/lib/recipes";
+import { RatingControl } from "@/components/RatingControl";
 
 export const dynamic = "force-dynamic";
 
@@ -72,6 +73,7 @@ export default async function RecipeDetailsPage({
               )}
             </p>
           </div>
+          <RatingControl recipeId={recipe.id} />
 
           <section className="detail-section" aria-labelledby="ingredients-heading">
             <h2 id="ingredients-heading">Ingredients</h2>

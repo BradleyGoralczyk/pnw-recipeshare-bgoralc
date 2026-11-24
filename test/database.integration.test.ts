@@ -7,6 +7,7 @@ vi.mock("server-only", () => ({}));
 
 import { getDb } from "@/lib/db";
 import { addRating, getRatingsForRecipe } from "@/lib/ratings";
+import { getAverageRating } from "@/lib/recipe-model";
 import { addRecipe, getRecipeById, getRecipes } from "@/lib/recipes";
 
 const hasDatabaseUrl = Boolean(process.env.DATABASE_URL || process.env.POSTGRES_URL);
@@ -43,13 +44,17 @@ describe.skipIf(!hasDatabaseUrl)("Neon persistence integration", () => {
       expect.arrayContaining([expect.objectContaining({ id: recipeId, title: recipe.title })]),
     );
 
-    const savedRating = await addRating(recipeId, 4);
-    expect(savedRating).toMatchObject({ recipeId, value: 4 });
-    await expect(getRatingsForRecipe(recipeId)).resolves.toEqual([savedRating]);
+    const firstSavedRating = await addRating(recipeId, 1);
+    const lastSavedRating = await addRating(recipeId, 5);
+    expect(firstSavedRating).toMatchObject({ recipeId, value: 1 });
+    expect(lastSavedRating).toMatchObject({ recipeId, value: 5 });
+    const savedRatings = await getRatingsForRecipe(recipeId);
+    expect(savedRatings).toEqual([firstSavedRating, lastSavedRating]);
     await expect(getRecipeById(recipeId)).resolves.toMatchObject({
       id: recipeId,
-      ratings: [4],
+      ratings: [1, 5],
     });
+    expect(getAverageRating(savedRatings.map((rating) => rating.value))).toBe(3);
   });
 
   it("rejects invalid rating values before they reach the database", async () => {

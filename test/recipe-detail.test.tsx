@@ -6,6 +6,7 @@ import { getRecipeById } from "@/lib/recipes";
 import { recipeFixtures } from "@/test/fixtures/recipes";
 
 vi.mock("@/lib/recipes", () => ({ getRecipeById: vi.fn() }));
+vi.mock("@/app/actions/ratings", () => ({ rateRecipe: vi.fn() }));
 
 beforeEach(() => {
   vi.mocked(getRecipeById).mockReset();
@@ -32,6 +33,10 @@ describe("recipe detail page", () => {
     ).toBeInTheDocument();
     expect(screen.getByText(`${recipe.prepTimeMinutes} minutes`)).toBeInTheDocument();
     expect(screen.getByText("4.7 out of 5")).toBeInTheDocument();
+    expect(screen.getByRole("group", { name: "Rate this recipe" })).toBeInTheDocument();
+    expect(screen.getByRole("radio", { name: "1 star" })).toBeInTheDocument();
+    expect(screen.getByRole("radio", { name: "5 stars" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Submit rating" })).toBeInTheDocument();
 
     const ingredientsSection = screen.getByRole("region", {
       name: "Ingredients",
