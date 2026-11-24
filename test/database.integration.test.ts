@@ -8,6 +8,7 @@ import { afterAll, describe, expect, it, vi } from "vitest";
 vi.mock("server-only", () => ({}));
 
 import { getDb } from "@/lib/db";
+import { addComment, getCommentsForRecipe } from "@/lib/comments";
 import { addRating, getRatingsForRecipe } from "@/lib/ratings";
 import { getAverageRating } from "@/lib/recipe-model";
 import { addRecipe, getRecipeById, getRecipes } from "@/lib/recipes";
@@ -47,6 +48,18 @@ describe.skipIf(!hasDatabaseUrl)("Neon persistence integration", () => {
     await expect(getRecipes()).resolves.toEqual(
       expect.arrayContaining([expect.objectContaining({ id: recipeId, title: recipe.title })]),
     );
+
+    const savedComment = await addComment(
+      recipeId,
+      "  Database Tester  ",
+      "  The seasoning worked well.  ",
+    );
+    expect(savedComment).toMatchObject({
+      recipeId,
+      authorName: "Database Tester",
+      body: "The seasoning worked well.",
+    });
+    await expect(getCommentsForRecipe(recipeId)).resolves.toEqual([savedComment]);
 
     const firstSavedRating = await addRating(recipeId, 1);
     const lastSavedRating = await addRating(recipeId, 5);

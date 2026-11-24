@@ -3,19 +3,32 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import RecipeDetailsPage from "@/app/recipes/[id]/page";
 import { getRecipeById } from "@/lib/recipes";
+import { getCommentsForRecipe } from "@/lib/comments";
 import { recipeFixtures } from "@/test/fixtures/recipes";
 
 vi.mock("@/lib/recipes", () => ({ getRecipeById: vi.fn() }));
+vi.mock("@/lib/comments", () => ({ getCommentsForRecipe: vi.fn(async () => []) }));
 vi.mock("@/app/actions/ratings", () => ({ rateRecipe: vi.fn() }));
+vi.mock("@/app/actions/comments", () => ({ createComment: vi.fn() }));
 
 beforeEach(() => {
   vi.mocked(getRecipeById).mockReset();
+  vi.mocked(getCommentsForRecipe).mockReset().mockResolvedValue([]);
 });
 
 describe("recipe detail page", () => {
   it("shows all recipe fields and the author for a known recipe", async () => {
     const recipe = recipeFixtures[0];
     vi.mocked(getRecipeById).mockResolvedValue(recipe);
+    vi.mocked(getCommentsForRecipe).mockResolvedValue([
+      {
+        id: "comment-1",
+        recipeId: recipe.id,
+        authorName: "Mina",
+        body: "The herbs were delicious.",
+        createdAt: "2026-11-24T12:00:00.000Z",
+      },
+    ]);
     const page = await RecipeDetailsPage({
       params: Promise.resolve({ id: recipe.id }),
     });
@@ -33,6 +46,10 @@ describe("recipe detail page", () => {
       "href",
       recipe.videoUrl,
     );
+    expect(screen.getByRole("heading", { name: "Comments" })).toBeInTheDocument();
+    expect(screen.getByText("The herbs were delicious.")).toBeInTheDocument();
+    expect(screen.getByText("Mina")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Post comment" })).toBeInTheDocument();
     expect(
       screen.getByRole("img", { name: recipe.imageAlt }),
     ).toBeInTheDocument();

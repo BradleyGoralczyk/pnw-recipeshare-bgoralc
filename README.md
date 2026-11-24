@@ -71,7 +71,7 @@ Repository: [BradleyGoralczyk/pnw-recipeshare-bgoralc](https://github.com/Bradle
 
 ### Could have
 
-- Comments - **Not done.**
+- Comments - **Done:** visitors can post a named comment on recipe details; comments are validated and persisted in Neon.
 - Favorites on a profile - **Not done.**
 - Servings scaler - **Done:** detail pages scale leading ingredient quantities from four servings.
 - Recipe video link - **Done:** recipes can include an optional validated video URL.

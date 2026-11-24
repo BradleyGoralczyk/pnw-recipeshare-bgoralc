@@ -49,7 +49,7 @@ Google requires OAuth client credentials and an exact redirect URI match. Keep a
 
 ## Progress
 
-- **Implemented and pushed:** S5 keyword search and S6 sorting (`c2402ee`).
-- **Implemented locally:** servings scaler, optional video URL, and persisted dietary tags/filter (migration `0002_recipe_details.sql`). Unit/component tests, Neon integration tests, TypeScript, and production build pass.
-- **Next:** push this batch, then implement C comments.
+- **Implemented and pushed:** S5 keyword search and S6 sorting (`c2402ee`); servings scaler, optional video URL, and persisted dietary tags/filter (`18abf60`).
+- **Implemented locally:** anonymous comments with input validation, Neon persistence (migration `0003_recipe_comments.sql`), and recipe-detail display. Unit/component and database integration coverage added.
+- **Next:** verify, push, and check deployment for comments.
 - **Deferred for setup:** S1-S4 and C favorites, for the provider/auth and storage reasons above.

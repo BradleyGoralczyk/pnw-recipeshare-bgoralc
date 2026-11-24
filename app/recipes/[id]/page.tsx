@@ -5,8 +5,10 @@ import { notFound } from "next/navigation";
 import { isRecipeImageOptimizable } from "@/lib/image-url";
 import { getAverageRating } from "@/lib/recipe-model";
 import { getRecipeById } from "@/lib/recipes";
+import { getCommentsForRecipe } from "@/lib/comments";
 import { RatingControl } from "@/components/RatingControl";
 import { ServingsScaler } from "@/components/ServingsScaler";
+import { CommentForm } from "@/components/CommentForm";
 
 export const dynamic = "force-dynamic";
 
@@ -25,6 +27,7 @@ export default async function RecipeDetailsPage({
   }
 
   const averageRating = getAverageRating(recipe.ratings);
+  const comments = await getCommentsForRecipe(id);
 
   return (
     <main className="page-shell detail-shell">
@@ -119,6 +122,23 @@ export default async function RecipeDetailsPage({
           <p className="image-caption">A recipe shared with care</p>
         </div>
       </article>
+
+      <section className="comments-section" aria-labelledby="comments-heading">
+        <h2 id="comments-heading">Comments</h2>
+        {comments.length === 0 ? (
+          <p className="comments-empty">No comments yet. Start the conversation.</p>
+        ) : (
+          <ul className="comment-list">
+            {comments.map((comment) => (
+              <li className="comment-card" key={comment.id}>
+                <p className="comment-meta">{comment.authorName}</p>
+                <p>{comment.body}</p>
+              </li>
+            ))}
+          </ul>
+        )}
+        <CommentForm recipeId={recipe.id} />
+      </section>
     </main>
   );
 }
