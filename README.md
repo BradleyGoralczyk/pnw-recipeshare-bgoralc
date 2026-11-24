@@ -84,7 +84,7 @@ Repository: [BradleyGoralczyk/pnw-recipeshare-bgoralc](https://github.com/Bradle
 - **E1 - Done:** public GitHub repository.
 - **E2 - Done:** agent instructions, product spec, and build plan are in the repository.
 - **E3 - Done:** tests run with `npm test`; database integration checks use `npm run db:test`.
-- **E4 - Partly done:** workflow is configured for pushes and pull requests to `master`; first remote run is pending the local commit being pushed.
-- **E5 - Partly done:** Vercel deploys from `master`; Production matches the last pushed commit, while this final-review commit is still local.
+- **E4 - Done:** GitHub Actions passed on the final-review commit and checks pushes and pull requests to `master`.
+- **E5 - Done:** latest Vercel Production deployment is READY and tracks the current `master` commit.
 - **E6 - Done:** secrets are read from environment variables; `.env.example` contains variable names only.
 - **E7 - Done:** this README documents the live app, setup, commands, and feature status.
