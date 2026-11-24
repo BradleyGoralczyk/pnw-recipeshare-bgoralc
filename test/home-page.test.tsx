@@ -17,6 +17,12 @@ describe("home page recipe browsing", () => {
       const card = screen.getByRole("article", { name: recipe.title });
       const averageRating = getAverageRating(recipe.ratings);
 
+      expect(
+        within(card).getByRole("link", {
+          name: `Open ${recipe.title} recipe`,
+        }),
+      ).toHaveAttribute("href", `/recipes/${recipe.id}`);
+
       if (averageRating === null) {
         throw new Error(`${recipe.title} should have sample ratings`);
       }

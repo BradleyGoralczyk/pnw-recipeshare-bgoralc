@@ -253,6 +253,212 @@ h2 {
   margin-left: 0.15rem;
 }
 
+.recipe-card-link {
+  border-radius: inherit;
+  color: inherit;
+  display: block;
+  height: 100%;
+  text-decoration: none;
+}
+
+.recipe-card-link:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: -3px;
+}
+
+.detail-shell {
+  max-width: 1180px;
+  padding-top: 2rem;
+}
+
+.back-link {
+  align-items: center;
+  color: var(--accent-dark);
+  display: inline-flex;
+  font-size: 0.95rem;
+  font-weight: 700;
+  gap: 0.55rem;
+  margin-bottom: 1.75rem;
+}
+
+.back-link:hover,
+.primary-link:hover {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.recipe-detail {
+  align-items: start;
+  display: grid;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.9fr);
+}
+
+.recipe-detail-copy {
+  grid-column: 1;
+  grid-row: 1;
+  min-width: 0;
+}
+
+.recipe-detail h1 {
+  font-size: clamp(2.35rem, 5vw, 3.75rem);
+}
+
+.recipe-author {
+  color: var(--muted);
+  font-size: 1rem;
+  margin: 1rem 0 0;
+}
+
+.recipe-author span {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.detail-meta {
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem 2rem;
+  margin-top: 1.4rem;
+  padding-bottom: 1.3rem;
+}
+
+.detail-prep-time,
+.detail-rating {
+  align-items: center;
+  display: flex;
+  gap: 0.45rem;
+  margin: 0;
+}
+
+.detail-prep-time {
+  color: var(--ink);
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+}
+
+.meta-label {
+  color: var(--muted);
+}
+
+.detail-section {
+  border-bottom: 1px solid var(--line);
+  padding: 1.55rem 0 1.7rem;
+}
+
+.detail-section h2 {
+  font-size: 1.6rem;
+}
+
+.ingredient-list {
+  color: #414c43;
+  display: grid;
+  gap: 0.65rem;
+  line-height: 1.5;
+  list-style: none;
+  margin: 1.1rem 0 0;
+  padding: 0;
+}
+
+.ingredient-list li {
+  padding-left: 1.3rem;
+  position: relative;
+}
+
+.ingredient-list li::before {
+  background: #8b9a7d;
+  border-radius: 50%;
+  content: "";
+  height: 0.42rem;
+  left: 0.2rem;
+  position: absolute;
+  top: 0.58rem;
+  width: 0.42rem;
+}
+
+.step-list {
+  display: grid;
+  gap: 1rem;
+  list-style: none;
+  margin: 1.2rem 0 0;
+  padding: 0;
+}
+
+.step-list li {
+  align-items: start;
+  color: #414c43;
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: 2rem minmax(0, 1fr);
+  line-height: 1.6;
+}
+
+.step-number {
+  align-items: center;
+  background: #e8eddf;
+  border-radius: 50%;
+  color: #536a4c;
+  display: inline-flex;
+  font-size: 0.85rem;
+  font-weight: 700;
+  height: 2rem;
+  justify-content: center;
+  width: 2rem;
+}
+
+.recipe-detail-photo-wrap {
+  background: #f1e9da;
+  border: 1px solid var(--line);
+  border-radius: 1.25rem;
+  grid-column: 2;
+  grid-row: 1;
+  overflow: hidden;
+  position: sticky;
+  top: 1.5rem;
+}
+
+.recipe-detail-photo {
+  aspect-ratio: 4 / 4.5;
+  display: block;
+  height: auto;
+  object-fit: cover;
+  width: 100%;
+}
+
+.image-caption {
+  color: var(--muted);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1rem;
+  font-style: italic;
+  margin: 0;
+  padding: 0.9rem 1.1rem 1rem;
+}
+
+.not-found-panel {
+  background: #f1e9da;
+  border: 1px solid #e8dece;
+  border-radius: 1.5rem;
+  margin: 2rem auto;
+  max-width: 700px;
+  padding: clamp(2rem, 6vw, 4rem);
+  text-align: center;
+}
+
+.not-found-panel .intro-copy {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.primary-link {
+  color: var(--accent-dark);
+  display: inline-block;
+  font-weight: 700;
+  margin-top: 1.5rem;
+}
+
 @media (max-width: 480px) {
   .header-note {
     font-size: 0.8rem;
@@ -289,6 +495,28 @@ h2 {
 
   .recipe-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 800px) {
+  .recipe-detail {
+    gap: 1.5rem;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .recipe-detail-photo-wrap {
+    grid-column: 1;
+    grid-row: 1;
+    position: static;
+  }
+
+  .recipe-detail-photo {
+    aspect-ratio: 16 / 10;
+  }
+
+  .recipe-detail-copy {
+    grid-column: 1;
+    grid-row: 2;
   }
 }
 

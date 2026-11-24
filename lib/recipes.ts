@@ -46,6 +46,10 @@ export function getAverageRating(ratings: number[]): number | null {
   return Number(average.toFixed(1));
 }
 
+export function getRecipeById(id: string): Recipe | undefined {
+  return recipes.find((recipe) => recipe.id === id);
+}
+
 // Starter recipes use Unsplash photos; all images are food-only and served from
 // Unsplash's image CDN. Recipe and rating persistence will be added with M6.
 export const recipes: Recipe[] = [
