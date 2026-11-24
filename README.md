@@ -29,7 +29,7 @@ npm run db:seed
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000). The seed command adds an Iranian salad and an Italian dessert and is safe to repeat.
+Open [http://localhost:3000](http://localhost:3000). The seed command adds 80 recipes covering every cuisine and category combination and is safe to repeat. Seven representative Unsplash photos are copied into public Vercel Blob storage by `npm run db:seed:images`; credits and source links are in [docs/seed-photo-credits.md](docs/seed-photo-credits.md).
 For this repository's existing sample data, `npm run db:migrate:images` copies the two sample photos to the connected public Blob store and updates their Neon URLs. It is safe to rerun. Existing images are grandfathered regardless of size; the 5 MB limit applies only to new uploads.
 
 ## Tests and build
@@ -41,7 +41,7 @@ npm run db:test
 npm run build
 ```
 
-`npm test` runs the complete unit and component test suite. `npm run db:test` runs the Neon integration checks, including recipe/rating persistence and repeatable seeding; it needs `DATABASE_URL` or `POSTGRES_URL`. The production build runs migrations and database checks before building Next.js. Database operations are skipped locally when no database URL is configured. Vercel supplies `DATABASE_URL` to its build environment.
+`npm test` runs the complete unit and component test suite, including recipe-catalog coverage. `npm run db:test` runs the Neon integration checks, including recipe/rating persistence and repeatable seeding; it needs `DATABASE_URL` or `POSTGRES_URL`. The production build runs migrations and database checks before building Next.js. Database operations are skipped locally when no database URL is configured. Vercel supplies `DATABASE_URL` to its build environment.
 
 ## Deployment
 

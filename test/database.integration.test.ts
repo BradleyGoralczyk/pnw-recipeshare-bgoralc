@@ -10,7 +10,7 @@ vi.mock("server-only", () => ({}));
 import { getDb } from "@/lib/db";
 import { addComment, getCommentsForRecipe } from "@/lib/comments";
 import { addRating, getRatingsForRecipe } from "@/lib/ratings";
-import { getAverageRating } from "@/lib/recipe-model";
+import { CATEGORIES, CUISINES, getAverageRating } from "@/lib/recipe-model";
 import { addRecipe, getRecipeById, getRecipes } from "@/lib/recipes";
 
 const hasDatabaseUrl = Boolean(process.env.DATABASE_URL || process.env.POSTGRES_URL);
@@ -83,7 +83,7 @@ describe.skipIf(!hasDatabaseUrl)("Neon persistence integration", () => {
     );
   });
 
-  it("seeds the two distinct sample recipes without duplicates on repeat runs", async () => {
+  it("seeds all cuisine/category recipes without duplicates on repeat runs", async () => {
     const seedScript = fileURLToPath(new URL("../db/seed.mjs", import.meta.url));
     for (let run = 0; run < 2; run += 1) {
       const result = spawnSync(process.execPath, [seedScript], {
@@ -96,31 +96,18 @@ describe.skipIf(!hasDatabaseUrl)("Neon persistence integration", () => {
     const seededRecipes = await getDb()`
       SELECT id, cuisine, category, image_url AS "imageUrl", COUNT(*)::int AS count
       FROM recipes
-      WHERE id IN (
-        'recipeshare-sample-persian-herb-salad',
-        'recipeshare-sample-italian-tiramisu'
-      )
+      WHERE id LIKE 'catalog-%' OR id LIKE 'recipeshare-sample-%'
       GROUP BY id, cuisine, category, image_url
       ORDER BY id
     `;
 
-    expect(seededRecipes).toEqual([
-      {
-        id: "recipeshare-sample-italian-tiramisu",
-        cuisine: "Italian",
-        category: "Dessert",
-        imageUrl:
-          "https://b5kiqjzugnm5hspn.public.blob.vercel-storage.com/recipe-images/migrated/recipeshare-sample-italian-tiramisu.jpg",
-        count: 1,
-      },
-      {
-        id: "recipeshare-sample-persian-herb-salad",
-        cuisine: "Iranian",
-        category: "Salad",
-        imageUrl:
-          "https://b5kiqjzugnm5hspn.public.blob.vercel-storage.com/recipe-images/migrated/recipeshare-sample-persian-herb-salad.jpg",
-        count: 1,
-      },
-    ]);
-  });
+    expect(seededRecipes).toHaveLength(CUISINES.length * CATEGORIES.length);
+    expect(seededRecipes.every((recipe) => recipe.count === 1)).toBe(true);
+    expect(new Set(seededRecipes.map((recipe) => `${recipe.cuisine}/${recipe.category}`)).size)
+      .toBe(CUISINES.length * CATEGORIES.length);
+    expect(seededRecipes.every((recipe) => recipe.imageUrl.includes(".public.blob.vercel-storage.com/recipe-images/")))
+      .toBe(true);
+    await expect(getDb()`SELECT id FROM recipes WHERE id = '17d05c64-abd7-4639-851d-bd80b26190fa'`)
+      .resolves.toEqual([]);
+  }, 30_000);
 });

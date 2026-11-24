@@ -2,6 +2,7 @@ import nextEnv from "@next/env";
 import { neon } from "@neondatabase/serverless";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { catalogRecipes } from "./recipe-catalog.mjs";
 
 nextEnv.loadEnvConfig(process.cwd(), process.env.NODE_ENV !== "production");
 
@@ -58,18 +59,31 @@ export const sampleRecipes = [
 ];
 
 export async function seedRecipes(sql) {
-  for (const recipe of sampleRecipes) {
+  for (const recipe of [...sampleRecipes, ...catalogRecipes]) {
     await sql`
       INSERT INTO recipes (
         id, author_name, title, cuisine, category, ingredients, steps,
-        prep_time_minutes, image_url, image_alt
+        prep_time_minutes, image_url, image_alt, dietary_tags, video_url
       ) VALUES (
         ${recipe.id}, ${recipe.authorName}, ${recipe.title}, ${recipe.cuisine},
         ${recipe.category}, ${JSON.stringify(recipe.ingredients)}::jsonb,
         ${JSON.stringify(recipe.steps)}::jsonb, ${recipe.prepTimeMinutes},
-        ${recipe.imageUrl}, ${recipe.imageAlt}
+        ${recipe.imageUrl}, ${recipe.imageAlt},
+        ${JSON.stringify(recipe.dietaryTags ?? [])}::jsonb, ${recipe.videoUrl ?? null}
       )
-      ON CONFLICT (id) DO NOTHING
+      ON CONFLICT (id) DO UPDATE SET
+        author_name = EXCLUDED.author_name,
+        title = EXCLUDED.title,
+        cuisine = EXCLUDED.cuisine,
+        category = EXCLUDED.category,
+        ingredients = EXCLUDED.ingredients,
+        steps = EXCLUDED.steps,
+        prep_time_minutes = EXCLUDED.prep_time_minutes,
+        image_url = EXCLUDED.image_url,
+        image_alt = EXCLUDED.image_alt,
+        dietary_tags = EXCLUDED.dietary_tags,
+        video_url = EXCLUDED.video_url
+      WHERE recipes.id LIKE 'catalog-%'
     `;
   }
 }
@@ -85,5 +99,5 @@ if (isDirectRun) {
   }
 
   await seedRecipes(neon(connectionString));
-  console.log(`Seeded ${sampleRecipes.length} sample recipes (safe to repeat).`);
+  console.log(`Seeded ${sampleRecipes.length + catalogRecipes.length} recipes (safe to repeat).`);
 }
