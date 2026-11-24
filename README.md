@@ -1,0 +1,90 @@
+# RecipeShare
+
+RecipeShare is a recipe-sharing website for discovering food from cuisines around the world. Visitors can browse and filter recipes, open cooking instructions, share a recipe, and leave a 1-to-5 star rating.
+
+**Live app:** [https://pnw-recipeshare-bgoralc.vercel.app](https://pnw-recipeshare-bgoralc.vercel.app)  
+The current Vercel deployment may require access to the project team.
+
+## Stack
+
+- Next.js App Router and React
+- TypeScript
+- Neon Postgres
+- Vitest and Testing Library
+- Vercel deployments from `master`
+
+## Run locally
+
+Requirements: Node.js 20.9 or newer and npm.
+
+```sh
+npm ci
+```
+
+Copy `.env.example` to `.env.local` and set `DATABASE_URL` to your Neon Postgres connection string. Keep the populated file private; it is ignored by Git. `POSTGRES_URL` is also accepted as a fallback by the server.
+
+```sh
+npm run db:migrate
+npm run db:seed
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000). The seed command adds an Iranian salad and an Italian dessert and is safe to repeat.
+
+## Tests and build
+
+```sh
+npm test
+npm run typecheck
+npm run db:test
+npm run build
+```
+
+`npm test` runs the complete unit and component test suite. `npm run db:test` runs the Neon integration checks, including recipe/rating persistence and repeatable seeding; it needs `DATABASE_URL` or `POSTGRES_URL`. The production build runs migrations and database checks before building Next.js. Database operations are skipped locally when no database URL is configured. Vercel supplies `DATABASE_URL` to its build environment.
+
+## Deployment
+
+The Vercel project deploys pushes to `master`. Configure `DATABASE_URL` in Vercel Production and Preview environments; keep it out of source control. GitHub Actions runs tests, TypeScript checking, and the production build on pushes and pull requests targeting `master`. CI does not need database credentials; its database-only checks skip when no database URL is configured.
+
+Repository: [BradleyGoralczyk/pnw-recipeshare-bgoralc](https://github.com/BradleyGoralczyk/pnw-recipeshare-bgoralc)
+
+## Feature checklist
+
+### Must have
+
+- **M1 Browse recipes - Done:** recipe cards show photos, title, cuisine, category, and average rating.
+- **M2 Recipe details - Done:** detail pages show recipe information, ingredients, steps, prep time, and author.
+- **M3 Share recipes - Done:** visitors can submit recipes; server validation reports missing or invalid fields and retains entered values.
+- **M4 Cuisine and category filters - Done:** filters combine, can be cleared, and show an empty-result message.
+- **M5 Rate recipes - Done:** visitors can save 1-to-5 star ratings; the saved average and count update on the detail page and cards.
+- **M6 Database persistence - Done:** recipes and ratings are stored in Neon and loaded by the app; Vercel has database environment variables configured.
+- **M7 Production samples - Partly done:** two different cuisine/category sample recipes are seeded idempotently and verified in Neon. The protected Production page still needs a signed-in browser check for the cards and filters.
+
+### Should have
+
+- **S1 Google sign-in and profile - Not done.**
+- **S2 Author recipe editing and deletion - Not done.**
+- **S3 Fair, account-linked ratings - Not done:** ratings are anonymous as scoped for the Must features.
+- **S4 Photo uploads - Not done:** recipes use image URLs.
+- **S5 Keyword search - Not done.**
+- **S6 Recipe sorting - Not done.**
+
+### Could have
+
+- Comments - **Not done.**
+- Favorites on a profile - **Not done.**
+- Servings scaler - **Not done.**
+- Recipe video link - **Not done.**
+- Dietary tags and filtering - **Not done.**
+- Phone-friendly layout - **Done:** responsive layout breakpoints are included.
+- Other ideas - **Not done:** none added.
+
+### Engineering requirements
+
+- **E1 - Done:** public GitHub repository.
+- **E2 - Done:** agent instructions, product spec, and build plan are in the repository.
+- **E3 - Done:** tests run with `npm test`; database integration checks use `npm run db:test`.
+- **E4 - Partly done:** workflow is configured for pushes and pull requests to `master`; first remote run is pending the local commit being pushed.
+- **E5 - Partly done:** Vercel deploys from `master`; Production matches the last pushed commit, while this final-review commit is still local.
+- **E6 - Done:** secrets are read from environment variables; `.env.example` contains variable names only.
+- **E7 - Done:** this README documents the live app, setup, commands, and feature status.
