@@ -3,7 +3,7 @@
 RecipeShare is a recipe-sharing website for discovering food from cuisines around the world. Visitors can browse and filter recipes, open cooking instructions, share a recipe, and leave a 1-to-5 star rating.
 
 **Live app:** [https://pnw-recipeshare-bgoralc.vercel.app](https://pnw-recipeshare-bgoralc.vercel.app)  
-The current Vercel deployment may require access to the project team.
+The public Vercel deployment tracks the `master` branch.
 
 ## Stack
 
@@ -29,7 +29,7 @@ npm run db:seed
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000). The seed command adds 80 recipes covering every cuisine and category combination and is safe to repeat. Thirty-seven recipes now use individually selected, licensed photos; credits appear with the images and are recorded in [docs/catalog-photo-credits.md](docs/catalog-photo-credits.md). The other catalog recipes use the existing category photos, credited in [docs/seed-photo-credits.md](docs/seed-photo-credits.md).
+Open [http://localhost:3000](http://localhost:3000). The seed command adds 80 recipes covering every cuisine/category combination and is safe to repeat. Thirty-seven catalog recipes use distinct Wikimedia Commons photos, with photographer and license links displayed beside each image and recorded in [docs/catalog-photo-credits.md](docs/catalog-photo-credits.md). They are representative photos and may not show the exact recipe. The other 41 catalog recipes still share the existing category photos, credited in [docs/seed-photo-credits.md](docs/seed-photo-credits.md).
 For this repository's existing sample data, `npm run db:migrate:images` copies the two sample photos to the connected public Blob store and updates their Neon URLs. It is safe to rerun. Existing images are grandfathered regardless of size; the 5 MB limit applies only to new uploads.
 
 ## Tests and build
@@ -87,7 +87,7 @@ Visitor uploads are intentionally open and stored as public images. Anyone can r
 - **E1 - Done:** public GitHub repository.
 - **E2 - Done:** agent instructions, product spec, and build plan are in the repository.
 - **E3 - Done:** tests run with `npm test`; database integration checks use `npm run db:test`.
-- **E4 - Done:** GitHub Actions passed on the final-review commit and checks pushes and pull requests to `master`.
+- **E4 - Done:** GitHub Actions runs tests, TypeScript checking, and the production build on pushes and pull requests targeting `master`.
 - **E5 - Done:** latest Vercel Production deployment is READY and tracks the current `master` commit.
 - **E6 - Done:** secrets are read from environment variables; `.env.example` contains variable names only.
 - **E7 - Done:** this README documents the live app, setup, commands, and feature status.
