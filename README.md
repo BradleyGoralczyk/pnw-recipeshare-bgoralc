@@ -65,7 +65,7 @@ Repository: [BradleyGoralczyk/pnw-recipeshare-bgoralc](https://github.com/Bradle
 - **S1 Google sign-in and profile - Not done.**
 - **S2 Author recipe editing and deletion - Not done.**
 - **S3 Fair, account-linked ratings - Not done:** ratings are anonymous as scoped for the Must features.
-- **S4 Photo uploads - Partly done:** visitors can upload public JPEG, PNG, and WebP images (maximum 5 MB) through Vercel Blob; finish configuring the Blob store and verify on the deployed app.
+- **S4 Photo uploads - Done:** visitors upload public JPEG, PNG, and WebP images up to 5 MB through Vercel Blob; production upload was verified. Uploads are open to visitors and have no count limit.
 - **S5 Keyword search - Done:** case-insensitive title and ingredient search combines with cuisine and category filters.
 - **S6 Recipe sorting - Done:** visitors can sort by newest or highest average rating.
 

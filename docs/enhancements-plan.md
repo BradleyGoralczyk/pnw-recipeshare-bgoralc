@@ -52,4 +52,4 @@ Google requires OAuth client credentials and an exact redirect URI match. Keep a
 - **Implemented and pushed:** S5 keyword search and S6 sorting (`c2402ee`); servings scaler, optional video URL, and persisted dietary tags/filter (`18abf60`).
 - **Implemented and pushed:** anonymous comments with input validation, Neon persistence (migration `0003_recipe_comments.sql`), and recipe-detail display (`6ebba69`). Unit/component and database integration coverage passed; Vercel Production is READY and the live recipe detail page returned the comments form.
 - **Deferred for setup:** S1-S3 and C favorites, for the provider/auth reasons above.
-- **In progress:** S4 public image upload UI and constrained Blob token route are implemented locally. Finish after the user creates the public Blob store, configures `BLOB_READ_WRITE_TOKEN` for Development and Production, then verify the upload on the deployed app.
+- **Implemented and pushed:** S4 public image uploads (`d689d55`). The photo form is live, local and Production upload round trips succeeded, the temporary test images were deleted, and the Blob URL remains stored through the existing Neon recipe image field.
